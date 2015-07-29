@@ -22,7 +22,7 @@
   "view profile switch to edit profile link": "Edit profile",
 
   "reset password header": "Reset your password",
-  "reset password description": "If you already have an account with us, you can reset your password here and have a new one sent to the email your registered with.",
+  "reset password description": "If you already have an account with us, you can reset your password here and have a new one sent to the email you're registered with.",
   "reset password switch to log-in link": "Know your password? Log in!",
   "reset password button text": "Send reset instructions",
   "reset password button text when attempting reset": "Sending...",

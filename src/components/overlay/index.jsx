@@ -182,31 +182,19 @@ export default React.createClass({
       overflow: 'scroll'
     };
 
-    if (this.state.viewport === 'normal') {
-      assign(overlayBackground, {
-        position: 'fixed',
-        overflowX: 'hidden',
-        overflowY: 'auto'
-      });
-
-      assign(overlay, {
-        boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-        maxWidth: 900,
-        width: '100%',
-        display: 'table',
-        margin: '50px auto'
-      });
-    }
-
     const overlayDescription = {
-      width: '50%',
-      display: 'table-cell',
       position: 'relative',
+      width: '100%',
       padding: 40,
       verticalAlign: 'middle',
       textAlign: 'center',
-      background: 'url(http://placekitten.com/500/600)',
+      background: 'url(http://i.imgur.com/7jrPz8t.jpg) center top',
       backgroundSize: 'cover'
+    };
+
+    const overlayContent = {
+      verticalAlign: 'middle',
+      padding: 40
     };
 
     const overlayCloseButton = {
@@ -224,11 +212,31 @@ export default React.createClass({
       left: 15
     };
 
-    const overlayContent = {
-      width: '50%',
-      display: 'table-cell',
-      padding: 40
-    };
+    if (this.state.viewport === 'normal') {
+      assign(overlayBackground, {
+        position: 'fixed',
+        overflowX: 'hidden',
+        overflowY: 'auto'
+      });
+
+      assign(overlay, {
+        boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+        maxWidth: 900,
+        width: '100%',
+        display: 'table',
+        margin: '50px auto'
+      });
+
+      assign(overlayDescription, {
+        width: '50%',
+        display: 'table-cell'
+      });
+
+      assign(overlayContent, {
+        width: '50%',
+        display: 'table-cell'
+      });
+    }
 
     const overlayParagraph = {
       color: '#fff',

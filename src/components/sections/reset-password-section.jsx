@@ -68,12 +68,6 @@ export default React.createClass({
           <TranslatedMessage tag='h1'
             style={styles.sectionTitle}
             message='reset password header' />
-          <p style={styles.sectionText}>
-            <TranslatedMessage tag='a'
-              href='#'
-              onClick={this.props.activateLogInSection}
-              message='reset password switch to log-in link' />
-          </p>
         </div>
 
         <Form kind='compact'
@@ -83,6 +77,15 @@ export default React.createClass({
           onSubmit={this.handleSubmit}
           disabled={d}
           autoDisableSubmit={this.props.shipSettings.disable_buttons_automatically} />
+
+        <div style={styles.sectionFooter}>
+          <p style={styles.sectionText}>
+            <TranslatedMessage tag='a'
+              href='#'
+              onClick={this.props.activateLogInSection}
+              message='reset password switch to log-in link' />
+          </p>
+        </div>
       </div>
     );
   }
