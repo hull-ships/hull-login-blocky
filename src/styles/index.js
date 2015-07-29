@@ -7,9 +7,9 @@ function getStyles() {
   const settings = getSettings();
 
   const reset = {
-    WebkitBoxSizing: 'content-box',
-    MozBoxSizing: 'content-box',
-    boxSizing: 'content-box',
+    WebkitBoxSizing: 'border-box',
+    MozBoxSizing: 'border-box',
+    boxSizing: 'border-box',
 
     width: 'auto',
     minWidth: 0,

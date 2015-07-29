@@ -169,7 +169,6 @@ export default React.createClass({
 
     let overlay = {
       backgroundColor: settings.whiteColor,
-      padding: 30,
       zIndex: 20001,
       outline: 'none',
       position: 'relative',
@@ -191,7 +190,7 @@ export default React.createClass({
       assign(overlay, {
         boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
         borderRadius: settings.mediumBorderRadius,
-        width: 340,
+        maxWidth: 900,
         margin: '50px auto'
       });
     }
@@ -208,11 +207,29 @@ export default React.createClass({
       right: 15
     };
 
+    const overlayDescription = {
+      width: '50%',
+      height: '50%',
+      position: 'relative',
+      'float': 'left',
+      background: 'url(http://placekitten.com/500/600)',
+      backgroundSize: 'cover',
+      padding: 20
+    };
+
+    const overlayContent = {
+      width: '50%',
+      'float': 'left',
+      padding: 20
+    };
+
     return {
       overlayContainer,
       overlayBackground,
       overlay,
-      overlayCloseButton
+      overlayCloseButton,
+      overlayDescription,
+      overlayContent
     };
   },
 
@@ -238,7 +255,16 @@ export default React.createClass({
             title='Close this dialog'
             onClick={this.handleClose} >×</a>
 
-          {this.props.children}
+          <div className='hull-login__modal__description'
+            style={styles.overlayDescription}>
+            <h1>My org title</h1>
+            <p>some info about logging in</p>
+          </div>
+
+          <div className='hull-login__modal__content'
+            style={styles.overlayContent}>
+            {this.props.children}
+          </div>
         </div>
         <div ref='background' className='hull-login__modal__overlay' style={styles.overlayBackground} onClick={this.handleClose} />
       </div>
