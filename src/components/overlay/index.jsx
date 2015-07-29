@@ -191,6 +191,7 @@ export default React.createClass({
         boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
         borderRadius: settings.mediumBorderRadius,
         maxWidth: 900,
+        display: 'table',
         margin: '50px auto'
       });
     }
@@ -209,9 +210,7 @@ export default React.createClass({
 
     const overlayDescription = {
       width: '50%',
-      height: '50%',
-      position: 'relative',
-      'float': 'left',
+      display: 'table-cell',
       background: 'url(http://placekitten.com/500/600)',
       backgroundSize: 'cover',
       padding: 20
@@ -219,7 +218,7 @@ export default React.createClass({
 
     const overlayContent = {
       width: '50%',
-      'float': 'left',
+      display: 'table-cell',
       padding: 20
     };
 
