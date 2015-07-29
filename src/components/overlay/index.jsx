@@ -20,6 +20,7 @@ export default React.createClass({
     className: React.PropTypes.string,
     title: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool.isRequired,
+    description: React.PropTypes.string.isRequired,
 
     onClose: React.PropTypes.func.isRequired
   },
@@ -177,6 +178,7 @@ export default React.createClass({
       MozTransition: 'opacity 300ms ease-out',
       transition: 'opacity 300ms ease-out',
       maxHeight: '100vh',
+      minHeight: '80vh',
       overflow: 'scroll'
     };
 
@@ -189,37 +191,48 @@ export default React.createClass({
 
       assign(overlay, {
         boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-        borderRadius: settings.mediumBorderRadius,
         maxWidth: 900,
+        width: '100%',
         display: 'table',
         margin: '50px auto'
       });
     }
 
-    const overlayCloseButton = {
-      position: 'absolute',
-      textAlign: 'center',
-      width: 20,
-      height: 20,
-      fontSize: 20,
-      lineHeight: '18px',
-      textDecoration: 'none',
-      top: 15,
-      right: 15
-    };
-
     const overlayDescription = {
       width: '50%',
       display: 'table-cell',
+      position: 'relative',
+      padding: 40,
+      verticalAlign: 'middle',
+      textAlign: 'center',
       background: 'url(http://placekitten.com/500/600)',
-      backgroundSize: 'cover',
-      padding: 20
+      backgroundSize: 'cover'
+    };
+
+    const overlayCloseButton = {
+      position: 'absolute',
+      textAlign: 'left',
+      verticalAlign: 'top',
+      color: '#fff',
+      width: 40,
+      height: 40,
+      fontSize: '40px',
+      fontWeight: 'bold',
+      lineHeight: 0.5,
+      textDecoration: 'none',
+      top: 15,
+      left: 15
     };
 
     const overlayContent = {
       width: '50%',
       display: 'table-cell',
-      padding: 20
+      padding: 40
+    };
+
+    const overlayParagraph = {
+      color: '#fff',
+      textAlign: 'center'
     };
 
     return {
@@ -228,7 +241,8 @@ export default React.createClass({
       overlay,
       overlayCloseButton,
       overlayDescription,
-      overlayContent
+      overlayContent,
+      overlayParagraph
     };
   },
 
@@ -247,17 +261,18 @@ export default React.createClass({
           tabIndex={0}
           ref='overlay'>
 
-          <a className='hull-login__modal_close-button'
+          <div className='hull-login__modal__description'
+            style={styles.overlayDescription}>
+            <a className='hull-login__modal_close-button'
             style={styles.overlayCloseButton}
             href='javascript: void 0;'
             aria-label='Close'
             title='Close this dialog'
             onClick={this.handleClose} >×</a>
 
-          <div className='hull-login__modal__description'
-            style={styles.overlayDescription}>
             <h1>My org title</h1>
-            <p>some info about logging in</p>
+            <p className='hull-login__modal__description__paragraph'
+            style={styles.overlayParagraph}>{this.props.description}</p>
           </div>
 
           <div className='hull-login__modal__content'

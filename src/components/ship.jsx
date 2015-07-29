@@ -52,11 +52,24 @@ export default React.createClass({
       editProfile: translate('edit profile header'),
       thanks: translate('thanks header')
     };
+    const descriptions = {
+      logIn: translate('log-in description', d),
+      signUp: translate('sign-up description', d),
+      resetPassword: translate('reset password description'),
+      showProfile: translate('view profile description'),
+      editProfile: translate('edit profile description'),
+      thanks: translate('thanks description')
+    };
 
     const Section = sections[this.state.activeSection];
     const t = titles[this.state.activeSection];
+    const desc = descriptions[this.state.activeSection];
     return (
-      <Overlay className={this.getScope()} onClose={this.props.actions.hideDialog} title={t} visible={true}>
+      <Overlay className={this.getScope()}
+        onClose={this.props.actions.hideDialog}
+        title={t}
+        description={desc}
+        visible={true}>
         <Section {...this.state} {...this.props.actions} />
       </Overlay>
     );

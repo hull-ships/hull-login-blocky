@@ -85,7 +85,9 @@ export default React.createClass({
 
     if (options.config.kind === 'expand') {
       let form;
+      let disabled = false;
       if (this.state.expanded) {
+        disabled = !!this.props.disabled || (this.props.autoDisableSubmit && !this.state.valid);
         form = <div style={{animation: 'slide 1s linear both'}}>
           <TCombForm ref='form'
             type={this.props.type}
@@ -103,7 +105,7 @@ export default React.createClass({
             type='submit'
             kind='primary'
             block={true}
-            disabled={!!this.props.disabled || (this.props.autoDisableSubmit && !this.state.valid)}>
+            disabled={disabled}>
             {this.props.submitMessage}</Button>
         </form>
       );

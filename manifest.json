@@ -43,15 +43,6 @@
       "maximun": 100
     },
     {
-      "name":"overlay_border_radius",
-      "title": "Overlay border radius",
-      "type": "number",
-      "format": "range",
-      "default": 6,
-      "minimum": 0,
-      "maximun": 100
-    },
-    {
       "name":"reset_styles",
       "title": "Reset styles",
       "description":"Isolate ship design from rest of the page by resetting the CSS styles within. Uncheck this if you want to style the ship yourself.",
