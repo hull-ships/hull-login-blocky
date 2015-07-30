@@ -209,7 +209,7 @@ export default React.createClass({
     const overlayContent = {
       position: 'relative',
       verticalAlign: 'middle',
-      padding: '80px 40px 40px 40px'
+      padding: '80px 40px 120px 40px'
     };
 
     const overlayCloseButton = {
@@ -257,8 +257,7 @@ export default React.createClass({
 
       assign(overlayContent, {
         width: '50%',
-        display: 'table-cell',
-        padding: 40
+        display: 'table-cell'
       });
     }
 

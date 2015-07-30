@@ -39,9 +39,11 @@ export default React.createClass({
 
     const a = {
       display: 'block',
-      padding: 20,
+      padding: 10,
       textAlign: 'center',
-      textDecoration: 'none'
+      textDecoration: 'none',
+      fontSize: 20,
+      fontWeight: 'bold'
     };
 
     return {
@@ -65,6 +67,10 @@ export default React.createClass({
       </li>;
       items.push(item);
     });
+
+    if (items.length === 0) {
+      return null;
+    }
 
     return <ul style={styles.ul}>
       {items}

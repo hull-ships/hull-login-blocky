@@ -9,6 +9,7 @@ import Overlay from './overlay';
 import Styles from './styles';
 import sections from './sections';
 import { TranslatedMessage } from './i18n';
+import OrganizationImage from './sections/organization-image';
 
 export default React.createClass({
   displayName: 'Ship',
@@ -92,6 +93,7 @@ export default React.createClass({
     const t = titles[this.state.activeSection];
     const desc = descriptions[this.state.activeSection];
     const nav = navs[this.state.activeSection];
+    const lefttitle = 'haha';
     return (
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
@@ -99,10 +101,13 @@ export default React.createClass({
         nav={nav}
         visible={true}>
         <div>
-            <h1>My org title</h1>
-            <TranslatedMessage tag='p'
-              className='hull-login__modal__description__paragraph'
-              message={desc} />
+          <OrganizationImage src={this.state.shipSettings.logo_image} />
+          <TranslatedMessage tag='h1'
+            className='hull-login__modal__description__title'
+            message={lefttitle} />
+          <TranslatedMessage tag='p'
+            className='hull-login__modal__description__paragraph'
+            message={desc} />
         </div>
         <Section {...this.state} {...this.props.actions} />
       </Overlay>

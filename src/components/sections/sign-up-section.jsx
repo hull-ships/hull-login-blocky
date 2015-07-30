@@ -6,7 +6,6 @@ import { translate } from '../../lib/i18n';
 import { Name, Email, Password } from '../../lib/types';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
-import OrganizationImage from './organization-image';
 import renderSectionContent from './render-section-content';
 import { TranslatedMessage } from '../i18n';
 
@@ -94,7 +93,6 @@ export default React.createClass({
     return (
       <div>
         <div style={styles.sectionHeader}>
-          <OrganizationImage style={styles.sectionOrganizationImage} src={this.props.shipSettings.logo_image} />
           <TranslatedMessage tag='h1'
             style={styles.sectionTitle}
             message="sign-up header"
