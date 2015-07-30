@@ -4,6 +4,7 @@ import Bounce from 'bounce';
 import React from 'react';
 import assign from 'object-assign';
 import { getSettings } from '../../styles/settings';
+import Nav from '../nav';
 
 let mediaQuery = window.matchMedia('(min-width: 460px)');
 
@@ -20,7 +21,6 @@ export default React.createClass({
     className: React.PropTypes.string,
     title: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool.isRequired,
-    description: React.PropTypes.string.isRequired,
 
     onClose: React.PropTypes.func.isRequired
   },
@@ -193,6 +193,7 @@ export default React.createClass({
     };
 
     const overlayContent = {
+      position: 'relative',
       verticalAlign: 'middle',
       padding: 40
     };
@@ -258,6 +259,15 @@ export default React.createClass({
     let styles = this.getStyles();
     let className = this.props.className + ' hull-login__modal';
 
+    let left = null;
+    let right = null;
+    if (React.Children.count(this.props.children) === 2) {
+      left = this.props.children[0];
+      right = this.props.children[1];
+    } else {
+      throw new Error('Overlay expects two children.');
+    }
+
     return (
       <div className={className} style={styles.overlayContainer}>
         <div
@@ -278,14 +288,13 @@ export default React.createClass({
             title='Close this dialog'
             onClick={this.handleClose} >×</a>
 
-            <h1>My org title</h1>
-            <p className='hull-login__modal__description__paragraph'
-            style={styles.overlayParagraph}>{this.props.description}</p>
+            {left}
           </div>
-
           <div className='hull-login__modal__content'
             style={styles.overlayContent}>
-            {this.props.children}
+            <Nav />
+
+            {right}
           </div>
         </div>
         <div ref='background' className='hull-login__modal__overlay' style={styles.overlayBackground} onClick={this.handleClose} />

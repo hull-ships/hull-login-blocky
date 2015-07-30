@@ -53,12 +53,12 @@ export default React.createClass({
       thanks: translate('thanks header')
     };
     const descriptions = {
-      logIn: translate('log-in description', d),
-      signUp: translate('sign-up description', d),
-      resetPassword: translate('reset password description'),
-      showProfile: translate('view profile description'),
-      editProfile: translate('edit profile description'),
-      thanks: translate('thanks description')
+      logIn: 'log-in description',
+      signUp: 'sign-up description',
+      resetPassword: 'reset password description',
+      showProfile: 'view profile description',
+      editProfile: 'edit profile description',
+      thanks: 'thanks description'
     };
 
     const Section = sections[this.state.activeSection];
@@ -68,8 +68,13 @@ export default React.createClass({
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
         title={t}
-        description={desc}
         visible={true}>
+        <div>
+            <h1>My org title</h1>
+            <TranslatedMessage tag='p'
+              className='hull-login__modal__description__paragraph'
+              message={desc} />
+        </div>
         <Section {...this.state} {...this.props.actions} />
       </Overlay>
     );

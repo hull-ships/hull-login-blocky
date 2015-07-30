@@ -104,12 +104,17 @@ function getStyles() {
     color: settings.grayColor
   };
 
+  const overlayLeft = {
+    color: settings.whiteColor
+  };
+
   return {
     reset,
     link,
     linkHover,
     linkFocus,
-    placeholder
+    placeholder,
+    overlayLeft
   };
 }
 

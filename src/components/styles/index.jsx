@@ -32,7 +32,9 @@ export default React.createClass({
       { ':-ms-input-placeholder': styles.placeholder },
       { '::-webkit-input-placeholder': styles.placeholder },
 
-      { '::-moz-focus-inner': s }
+      { '::-moz-focus-inner': s },
+
+      { '.hull-login__modal__description': styles.overlayLeft }
     ];
 
     if (this.props.reset) {
