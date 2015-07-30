@@ -3,6 +3,7 @@
 import Bounce from 'bounce';
 import React from 'react';
 import assign from 'object-assign';
+import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 import { getSettings } from '../../styles/settings';
 import Nav from '../nav';
 
@@ -16,6 +17,11 @@ const FOCUSABLE_ELEMENTS_SELECTOR = 'a[href], area[href], input:not([disabled]),
 
 export default React.createClass({
   displayName: 'Overlay',
+
+  mixins: [
+    StyleResolverMixin,
+    BrowserStateMixin
+  ],
 
   propTypes: {
     className: React.PropTypes.string,
@@ -203,7 +209,7 @@ export default React.createClass({
     const overlayContent = {
       position: 'relative',
       verticalAlign: 'middle',
-      padding: 40
+      padding: '80px 40px 40px 40px'
     };
 
     const overlayCloseButton = {
@@ -218,7 +224,15 @@ export default React.createClass({
       lineHeight: 0.5,
       textDecoration: 'none',
       top: 15,
-      left: 15
+      left: 15,
+
+      states: [
+        {
+          hover: {
+            color: '#333'
+          }
+        }
+      ]
     };
 
     if (this.state.viewport === 'normal') {
@@ -243,7 +257,8 @@ export default React.createClass({
 
       assign(overlayContent, {
         width: '50%',
-        display: 'table-cell'
+        display: 'table-cell',
+        padding: 40
       });
     }
 
@@ -290,11 +305,12 @@ export default React.createClass({
           <div className='hull-login__modal__description'
             style={styles.overlayDescription}>
             <a className='hull-login__modal_close-button'
-            style={styles.overlayCloseButton}
-            href='javascript: void 0;'
-            aria-label='Close'
-            title='Close this dialog'
-            onClick={this.handleClose} >×</a>
+              {...this.getBrowserStateEvents()}
+              style={styles.overlayCloseButton}
+              href='javascript: void 0;'
+              aria-label='Close'
+              title='Close this dialog'
+              onClick={this.handleClose} >×</a>
 
             {left}
           </div>

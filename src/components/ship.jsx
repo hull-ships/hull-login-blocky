@@ -84,7 +84,7 @@ export default React.createClass({
       signUp: [assign({ current: true }, signUpNav), logInNav],
       resetPassword: [signUpNav, assign({ current: true }, logInNav)],
       showProfile: [assign({ current: true }, viewProfileNav), logOutNav],
-      editProfile: [assign({ current: true, name: 'Edit Profile' }, viewProfileNav), logOutNav],
+      editProfile: [assign({ current: true }, viewProfileNav, { name: 'Edit Profile' }), logOutNav],
       thanks: null
     };
 

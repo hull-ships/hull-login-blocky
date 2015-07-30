@@ -22,6 +22,14 @@ const sectionFooter = {
   marginTop: 30
 };
 
+const stickySectionFooter = {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  padding: 40
+};
+
 function getStyles() {
   const settings = getSettings();
 
@@ -38,7 +46,8 @@ function getStyles() {
     sectionUserImage,
     sectionTitle,
     sectionText,
-    sectionFooter
+    sectionFooter,
+    stickySectionFooter
   };
 }
 

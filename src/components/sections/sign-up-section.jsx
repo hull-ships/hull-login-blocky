@@ -104,7 +104,7 @@ export default React.createClass({
 
         {content}
 
-        <div style={styles.sectionFooter}>
+        <div style={styles.stickySectionFooter}>
           <TranslatedMessage tag='p'
             style={styles.sectionText}
             message="sign-up fine print"
