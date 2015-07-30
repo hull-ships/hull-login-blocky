@@ -229,7 +229,7 @@ export default React.createClass({
       states: [
         {
           hover: {
-            color: '#333'
+            color: '#666'
           }
         }
       ]
@@ -305,7 +305,7 @@ export default React.createClass({
             style={styles.overlayDescription}>
             <a className='hull-login__modal_close-button'
               {...this.getBrowserStateEvents()}
-              style={styles.overlayCloseButton}
+              style={this.buildStyles(styles.overlayCloseButton)}
               href='javascript: void 0;'
               aria-label='Close'
               title='Close this dialog'
