@@ -202,7 +202,7 @@ export default React.createClass({
       padding: 40,
       verticalAlign: 'middle',
       textAlign: 'center',
-      background: 'url(http://i.imgur.com/IBb2N4q.jpg) center top',
+      background: 'url(http://i.imgur.com/7jrPz8t.jpg) center top',
       backgroundSize: 'cover'
     };
 

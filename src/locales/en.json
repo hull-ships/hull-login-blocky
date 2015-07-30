@@ -5,6 +5,7 @@
   "nav complete profile link": "Complete your profile",
 
   "edit profile header": "Edit your profile",
+  "edit profile photo header": "",
   "edit profile description": "",
   "edit profile header when profile incomplete": "Complete your profile",
   "edit profile button text": "Update profile",
@@ -18,10 +19,12 @@
   "edit profile email field": "Your email",
 
   "view profile header": "View your profile",
+  "view profile photo header": "",
   "view profile description": "",
   "view profile switch to edit profile link": "Edit profile",
 
   "reset password header": "Reset your password",
+  "reset password photo header": "",
   "reset password description": "If you already have an account with us, you can reset your password here and have a new one sent to the email you're registered with.",
   "reset password switch to log-in link": "Know your password? Log in!",
   "reset password button text": "Send reset instructions",
@@ -30,10 +33,12 @@
   "reset password email placeholder": "Your email",
 
   "thanks header": "Thanks for signing up!",
+  "thanks photo header": "",
   "thanks description": "",
   "thanks message": "Hi {name}, your registration is now complete and so we'll keep you up to date.",
 
   "log-in header": "Log in to {organization}",
+  "log-in photo header": "",
   "log-in description": "",
   "log-in social button text": "Log in with {provider}",
   "log-in social button text when attempting login": "Logging in with {provider}",
@@ -47,6 +52,7 @@
   "log-in forgot password link": "Forgot password?",
 
   "sign-up header": "Sign up for {organization}",
+  "sign-up photo header": "",
   "sign-up description": "",
   "sign-up fine print": "By signing up, you agree to {organization}'s Terms of Service.",
   "sign-up social button text": "Sign up with {provider}",

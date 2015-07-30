@@ -46,21 +46,13 @@ export default React.createClass({
     if (!this.state.dialogIsVisible) { return null; }
 
     const d = { organization: this.state.organization.name };
-    const titles = {
-      logIn: translate('log-in header', d),
-      signUp: translate('sign-up header', d),
-      resetPassword: translate('reset password header'),
-      showProfile: translate('view profile header'),
-      editProfile: translate('edit profile header'),
-      thanks: translate('thanks header')
-    };
-    const descriptions = {
-      logIn: 'log-in description',
-      signUp: 'sign-up description',
-      resetPassword: 'reset password description',
-      showProfile: 'view profile description',
-      editProfile: 'edit profile description',
-      thanks: 'thanks description'
+    const name = {
+      logIn: 'log-in',
+      signUp: 'sign-up',
+      resetPassword: 'reset password',
+      showProfile: 'view profile',
+      editProfile: 'edit profile',
+      thanks: 'thanks'
     };
 
     const signUpNav = {
@@ -90,24 +82,29 @@ export default React.createClass({
     };
 
     const Section = sections[this.state.activeSection];
-    const t = titles[this.state.activeSection];
-    const desc = descriptions[this.state.activeSection];
+    const overlayTitle = translate(name[this.state.activeSection] + ' header', d);
     const nav = navs[this.state.activeSection];
-    const lefttitle = 'haha';
+
+    const leftTitle = name[this.state.activeSection] + ' photo header';
+    const description = name[this.state.activeSection] + ' description';
+
     return (
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
-        title={t}
+        title={overlayTitle}
         nav={nav}
         visible={true}>
         <div>
           <OrganizationImage src={this.state.shipSettings.logo_image} />
           <TranslatedMessage tag='h1'
             className='hull-login__modal__description__title'
-            message={lefttitle} />
+            style={{ textAlign: 'center', color: '#fff', fontSize: 25, fontWeight: 'bold' }}
+            message={leftTitle}
+            variables={{ d }} />
           <TranslatedMessage tag='p'
             className='hull-login__modal__description__paragraph'
-            message={desc} />
+            style={{ textAlign: 'center', color: '#fff' }}
+            message={description} />
         </div>
         <Section {...this.state} {...this.props.actions} />
       </Overlay>
