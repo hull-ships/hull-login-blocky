@@ -27,6 +27,13 @@
       "default": "#aaaaaa"
     },
     {
+      "name":"light_text_color",
+      "title": "Light text color",
+      "type": "string",
+      "format": "color",
+      "default": "#ffffff"
+    },
+    {
       "name":"link_color",
       "title": "Link color",
       "type": "string",
@@ -41,6 +48,48 @@
       "default": 3,
       "minimum": 0,
       "maximun": 100
+    },
+    {
+      "name":"login_image",
+      "title": "Login image",
+      "description": "Show this image on the background of the login page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"signup_image",
+      "title": "Signup image",
+      "description": "Show this image on the background of the signup page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"reset_image",
+      "title": "Reset image",
+      "description": "Show this image on the background of the reset password page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"view_profile_image",
+      "title": "View profile image",
+      "description": "Show this image on the background of the view profile page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"edit_profile_image",
+      "title": "Edit profile image",
+      "description": "Show this image on the background of the edit profile page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"thank_image",
+      "title": "Thanks image",
+      "description": "Show this image on the background of the thanks for registration page",
+      "type": "string",
+      "format": "image"
     },
     {
       "name":"reset_styles",

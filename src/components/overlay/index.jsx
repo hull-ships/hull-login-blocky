@@ -27,6 +27,7 @@ export default React.createClass({
     className: React.PropTypes.string,
     title: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool.isRequired,
+    image: React.PropTypes.string.isRequired,
 
     onClose: React.PropTypes.func.isRequired,
     nav: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -202,7 +203,8 @@ export default React.createClass({
       padding: 40,
       verticalAlign: 'middle',
       textAlign: 'center',
-      background: 'url(http://i.imgur.com/7jrPz8t.jpg) center top',
+      backgroundImage: 'url(' + this.props.image + ')',
+      backgroundPosition: 'center top',
       backgroundSize: 'cover'
     };
 

@@ -85,6 +85,16 @@ export default React.createClass({
     const overlayTitle = translate(name[this.state.activeSection] + ' header', d);
     const nav = navs[this.state.activeSection];
 
+    const photos = {
+      logIn: this.state.shipSettings.login_image,
+      signUp: this.state.shipSettings.signup_image,
+      resetPassword: this.state.shipSettings.reset_image,
+      showProfile: this.state.shipSettings.view_profile_image,
+      editProfile: this.state.shipSettings.edit_profile_image,
+      thanks: this.state.shipSettings.thanks_image
+    };
+
+    const photo = photos[this.state.activeSection];
     const leftTitle = name[this.state.activeSection] + ' photo header';
     const description = name[this.state.activeSection] + ' description';
 
@@ -93,17 +103,18 @@ export default React.createClass({
         onClose={this.props.actions.hideDialog}
         title={overlayTitle}
         nav={nav}
-        visible={true}>
+        visible={true}
+        image={photo}>
         <div>
           <OrganizationImage src={this.state.shipSettings.logo_image} />
           <TranslatedMessage tag='h1'
             className='hull-login__modal__description__title'
-            style={{ textAlign: 'center', color: '#fff', fontSize: 25, fontWeight: 'bold' }}
+            style={{ textAlign: 'center', color: this.state.shipSettings.light_text_color, fontSize: 50, fontWeight: 'bold' }}
             message={leftTitle}
             variables={{ d }} />
           <TranslatedMessage tag='p'
             className='hull-login__modal__description__paragraph'
-            style={{ textAlign: 'center', color: '#fff' }}
+            style={{ textAlign: 'center', color: this.state.shipSettings.light_text_color }}
             message={description} />
         </div>
         <Section {...this.state} {...this.props.actions} />
