@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import assign from 'object-assign';
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup';
 import LayeredComponentMixin from 'react-components/layered-component-mixin';
 import { translate } from '../lib/i18n';
@@ -61,13 +62,41 @@ export default React.createClass({
       thanks: 'thanks description'
     };
 
+    const signUpNav = {
+      name: 'Sign up',
+      action: this.props.actions.activateSignUpSection
+    };
+    const logInNav = {
+      name: 'Log in',
+      action: this.props.actions.activateLogInSection
+    };
+    const viewProfileNav = {
+      name: 'View Profile',
+      action: this.props.actions.activateShowProfileSection
+    };
+    const logOutNav = {
+      name: 'Log out',
+      action: this.props.actions.logOut
+    };
+
+    const navs = {
+      logIn: [signUpNav, assign({ current: true }, logInNav)],
+      signUp: [assign({ current: true }, signUpNav), logInNav],
+      resetPassword: [signUpNav, assign({ current: true }, logInNav)],
+      showProfile: [assign({ current: true }, viewProfileNav), logOutNav],
+      editProfile: [assign({ current: true, name: 'Edit Profile' }, viewProfileNav), logOutNav],
+      thanks: null
+    };
+
     const Section = sections[this.state.activeSection];
     const t = titles[this.state.activeSection];
     const desc = descriptions[this.state.activeSection];
+    const nav = navs[this.state.activeSection];
     return (
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
         title={t}
+        nav={nav}
         visible={true}>
         <div>
             <h1>My org title</h1>

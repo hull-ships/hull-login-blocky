@@ -22,7 +22,15 @@ export default React.createClass({
     title: React.PropTypes.string.isRequired,
     visible: React.PropTypes.bool.isRequired,
 
-    onClose: React.PropTypes.func.isRequired
+    onClose: React.PropTypes.func.isRequired,
+    nav: React.PropTypes.arrayOf(React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      action: React.PropTypes.oneOfType([
+          React.PropTypes.func,
+          React.PropTypes.string
+        ]).isRequired,
+      current: React.PropTypes.bool
+    }))
   },
 
   getInitialState() {
@@ -292,7 +300,7 @@ export default React.createClass({
           </div>
           <div className='hull-login__modal__content'
             style={styles.overlayContent}>
-            <Nav />
+            <Nav items={this.props.nav} />
 
             {right}
           </div>
