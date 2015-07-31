@@ -1,0 +1,211 @@
+{
+  "name": "Login",
+  "description": "A complete user registration and social login modal",
+  "picture": "picture.png",
+  "index": "ship.js",
+  "version": "0.0.1",
+  "settings": [
+    {
+      "name":"logo_image",
+      "title": "Logo image",
+      "description": "Show this image as your logo on the sign-up and login pages.",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"primary_color",
+      "title": "Primary color",
+      "type": "string",
+      "format": "color",
+      "default": "#fa5400"
+    },
+    {
+      "name":"text_color",
+      "title": "Text color",
+      "type": "string",
+      "format": "color",
+      "default": "#aaaaaa"
+    },
+    {
+      "name":"light_text_color",
+      "title": "Light text color",
+      "type": "string",
+      "format": "color",
+      "default": "#ffffff"
+    },
+    {
+      "name":"link_color",
+      "title": "Link color",
+      "type": "string",
+      "format": "color",
+      "default": "#aaaaaa"
+    },
+    {
+      "name":"button_border_radius",
+      "title": "Button border radius",
+      "type": "number",
+      "format": "range",
+      "default": 3,
+      "minimum": 0,
+      "maximun": 100
+    },
+    {
+      "name":"login_image",
+      "title": "Login image",
+      "description": "Show this image on the background of the login page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"signup_image",
+      "title": "Signup image",
+      "description": "Show this image on the background of the signup page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"reset_image",
+      "title": "Reset image",
+      "description": "Show this image on the background of the reset password page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"view_profile_image",
+      "title": "View profile image",
+      "description": "Show this image on the background of the view profile page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"edit_profile_image",
+      "title": "Edit profile image",
+      "description": "Show this image on the background of the edit profile page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"thank_image",
+      "title": "Thanks image",
+      "description": "Show this image on the background of the thanks for registration page",
+      "type": "string",
+      "format": "image"
+    },
+    {
+      "name":"reset_styles",
+      "title": "Reset styles",
+      "description":"Isolate ship design from rest of the page by resetting the CSS styles within. Uncheck this if you want to style the ship yourself.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"show_classic_login",
+      "title": "Allow email & password registration",
+      "description": "Enable email-based sign ups on your website, i.e. sign ups that don't require social login.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"show_classic_login_as_button",
+      "title": "Show email registration as button",
+      "description": "Make email registration appear as a button just like social login. Clicking this button will expand the traditional sign-up form.",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name":"disable_buttons_automatically",
+      "title": "Visually disable submit buttons for incomplete forms",
+      "description": "If checked, disable the 'log in' and 'sign up' buttons when their forms are incomplete. Incomplete submissions will not be allowed regardless of the state of this option.",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name":"show_sign_up_section_after",
+      "title": "Show sign up section delay",
+      "description": "This is the wait time (in seconds) before automatically showing the sign-up section to unregistered visitors (once per user). 0 seconds disables the pop-up.",
+      "type": "number",
+      "format": "number",
+      "minimum": 0,
+      "default": 2
+    },
+    {
+      "name":"hide_thanks_section_after",
+      "title": "Hide thanks section delay",
+      "description": "This is the wait time (in seconds) before automatically hiding the thanks section (i.e. 'thanks for signing up!') once users finish registration (0 to disable).",
+      "type": "number",
+      "format": "number",
+      "default": 2
+    },
+    {
+      "name":"show_login",
+      "title": "Display log in link",
+      "description": "When logged out, show a 'log in' link.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"show_signup",
+      "title": "Display sign up link",
+      "description": "When logged out, show a 'sign up' link.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"show_profile",
+      "title": "Display user profile link",
+      "description": "When logged in, show a link to view and edit their profile.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"custom_buttons",
+      "title": "Custom links",
+      "description": "Add custom links to show when a user is logged in.",
+      "type": "array",
+      "format": "table",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Link Name"
+          },
+          "url": {
+            "type": "string",
+            "title": "Link URL",
+            "format": "uri"
+          },
+          "popup": {
+            "type": "boolean",
+            "title": "New Window?"
+          }
+        },
+        "required": [ "text", "url" ]
+      },
+      "default": [
+        {
+          "text": "Account",
+          "url": "/account",
+          "popup": true
+        }
+      ]
+    }
+  ],
+  "deployment_settings": [
+    {
+      "name": "redirect_url",
+      "title": "Redirect URL",
+      "description": "Where to redirect when login has succeeded.",
+      "type": "string"
+    }
+  ],
+  "resources": [
+    {
+      "name": "profile_form",
+      "type": "form"
+    }
+  ],
+  "locales": [
+    "en"
+  ]
+}
