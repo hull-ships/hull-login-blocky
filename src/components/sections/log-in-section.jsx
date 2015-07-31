@@ -43,7 +43,7 @@ export default React.createClass({
       password: {
         placeholder: translate('log-in password placeholder'),
         type: 'password',
-        help: <TranslatedMessage tag='a' href='javascript: void 0;' onClick={this.props.activateResetPasswordSection} message='log-in forgot password link' />,
+        help: <TranslatedMessage message='log-in password help text' />,
         hasError
       }
     };
@@ -73,9 +73,17 @@ export default React.createClass({
       disabled: d
     });
 
+    const styles = getStyles();
+
     return (
       <div>
         {content}
+
+        <div style={styles.stickySectionFooter}>
+          <p style={styles.sectionText}>
+            <TranslatedMessage tag='a' href='javascript: void 0;' onClick={this.props.activateResetPasswordSection} message='log-in forgot password link' />
+          </p>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import assign from 'object-assign';
+import { getSettings } from '../../styles/settings';
 
 export default React.createClass({
   displayName: 'Nav',
@@ -18,6 +19,8 @@ export default React.createClass({
   },
 
   getStyles() {
+    let settings = getSettings();
+
     const ul = {
       position: 'absolute',
       top: 0,
@@ -27,30 +30,37 @@ export default React.createClass({
       listStyle: 'none'
     };
 
-    const li = {
+    const navItem = {
       display: 'block',
       'float': 'left',
       width: '' + (100 / this.props.items.length) + '%'
     };
 
-    const current = assign({
+    const navItemActive = {
+      ...navItem,
       background: '#fff'
-    }, li);
+    };
 
-    const a = {
+    const navItemTitle = {
       display: 'block',
-      padding: 10,
       textAlign: 'center',
       textDecoration: 'none',
-      fontSize: 20,
-      fontWeight: 'bold'
+      fontFamily: settings.secondaryFontFamily,
+      fontSize: 26,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      lineHeight: 1,
+      letterSpacing: 1,
+      padding: '12px 0',
+      position: 'relative',
+      top: 2
     };
 
     return {
       ul,
-      li,
-      current,
-      a
+      navItem,
+      navItemActive,
+      navItemTitle
     };
   },
 
@@ -62,9 +72,12 @@ export default React.createClass({
       let href = (typeof value.action === 'string') ? value.action : '#';
       let onClick = (typeof value.action === 'string') ? null : value.action;
 
-      let item = <li style={(value.current) ? styles.current : styles.li}>
-        <a href={href} style={styles.a} onClick={onClick}>{value.name}</a>
-      </li>;
+      let item = (
+        <li style={(value.current) ? styles.navItemActive : styles.navItem}>
+          <a href={href} style={styles.navItemTitle} onClick={onClick}>{value.name}</a>
+        </li>
+      );
+
       items.push(item);
     });
 

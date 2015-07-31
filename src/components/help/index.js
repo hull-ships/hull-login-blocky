@@ -4,7 +4,7 @@ import React from 'react';
 
 const styles = {
   display: 'block',
-  textAlign: 'left',
+  textAlign: 'center',
   marginTop: 5
 };
 

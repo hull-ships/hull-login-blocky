@@ -51,25 +51,21 @@ export default React.createClass({
   },
 
   render() {
-    const u = this.props.user;
     const styles = getStyles();
 
     return (
       <div>
-        <div style={styles.sectionHeader} className='hull-login__profile-header'>
-          <UserImage style={styles.sectionUserImage} src={u.picture} />
-          <h1 style={styles.sectionTitle}>{u.name || u.username || u.email}</h1>
-          <p style={styles.sectionText} className='hull-login__profile-edit-link'>
+        {this.renderProfile()}
+
+        <div style={styles.stickySectionFooter}>
+          <p style={styles.sectionText}>
             <TranslatedMessage tag='a'
               href='#'
               onClick={this.props.activateEditProfileSection}
               message='view profile switch to edit profile link' />
           </p>
         </div>
-
-        {this.renderProfile()}
       </div>
     );
   }
 });
-

@@ -192,14 +192,14 @@ export default React.createClass({
       msTransition: 'opacity 300ms ease-out',
       MozTransition: 'opacity 300ms ease-out',
       transition: 'opacity 300ms ease-out',
-      height: 600,
+      minHeight: 600,
       overflow: 'scroll'
     };
 
     const overlayDescription = {
       position: 'relative',
       width: '100%',
-      padding: 40,
+      padding: '0 60px',
       verticalAlign: 'middle',
       textAlign: 'center',
       backgroundImage: 'url(' + this.props.image + ')',
@@ -210,7 +210,7 @@ export default React.createClass({
     const overlayContent = {
       position: 'relative',
       verticalAlign: 'middle',
-      padding: '0 60px'
+      padding: '30px 60px'
     };
 
     const overlayCloseButton = {
@@ -312,7 +312,7 @@ export default React.createClass({
               href='javascript: void 0;'
               aria-label='Close'
               title='Close this dialog'
-              onClick={this.handleClose} >×</a>
+              onClick={this.handleClose}>×</a>
 
             {left}
           </div>

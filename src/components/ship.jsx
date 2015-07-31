@@ -9,7 +9,16 @@ import Overlay from './overlay';
 import Styles from './styles';
 import sections from './sections';
 import { TranslatedMessage } from './i18n';
-import OrganizationImage from './sections/organization-image';
+import { getSettings } from '../styles/settings';
+
+const name = {
+  logIn: 'log-in',
+  signUp: 'sign-up',
+  resetPassword: 'reset password',
+  showProfile: 'view profile',
+  editProfile: 'edit profile',
+  thanks: 'thanks'
+};
 
 export default React.createClass({
   displayName: 'Ship',
@@ -46,14 +55,6 @@ export default React.createClass({
     if (!this.state.dialogIsVisible) { return null; }
 
     const d = { organization: this.state.organization.name };
-    const name = {
-      logIn: 'log-in',
-      signUp: 'sign-up',
-      resetPassword: 'reset password',
-      showProfile: 'view profile',
-      editProfile: 'edit profile',
-      thanks: 'thanks'
-    };
 
     const signUpNav = {
       name: 'Sign up',
@@ -94,31 +95,59 @@ export default React.createClass({
       thanks: this.state.shipSettings.thanks_image
     };
 
-    const photo = photos[this.state.activeSection];
-    const leftTitle = name[this.state.activeSection] + ' photo header';
-    const description = name[this.state.activeSection] + ' description';
-
     return (
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
         title={overlayTitle}
         nav={nav}
         visible={true}
-        image={photo}>
-        <div>
-          <OrganizationImage src={this.state.shipSettings.logo_image} />
-          <TranslatedMessage tag='h1'
-            className='hull-login__modal__description__title'
-            style={{ textAlign: 'center', color: this.state.shipSettings.light_text_color, fontSize: 50, fontWeight: 'bold' }}
-            message={leftTitle}
-            variables={{ d }} />
-          <TranslatedMessage tag='p'
-            className='hull-login__modal__description__paragraph'
-            style={{ textAlign: 'center', color: this.state.shipSettings.light_text_color }}
-            message={description} />
-        </div>
+        image={photos[this.state.activeSection]}>
+        {this.renderLeftContent()}
         <Section {...this.state} {...this.props.actions} />
       </Overlay>
+    );
+  },
+
+  renderLeftContent() {
+    let settings = getSettings();
+
+    const d = { organization: this.state.organization.name };
+
+    let descriptionStyle = {
+      textAlign: 'center',
+      color: this.state.shipSettings.light_text_color
+    };
+
+    let titleStyle = {
+      ...descriptionStyle,
+      fontFamily: settings.secondaryFontFamily,
+      fontSize: 36,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      letterSpacing: 1
+    };
+
+    let title;
+    if (this.state.activeSection === 'logIn' && this.state.shipSettings.logo_image) {
+      title = <img src={this.state.shipSettings.logo_image} />;
+    } else {
+      title = <TranslatedMessage tag='h1'
+        className='hull-login__modal__description__title'
+        style={titleStyle}
+        message={name[this.state.activeSection] + ' photo header'}
+        variables={d} />;
+    }
+
+    let description = <TranslatedMessage tag='p'
+      className='hull-login__modal__description__paragraph'
+      style={descriptionStyle}
+      message={name[this.state.activeSection] + ' description'} />;
+
+    return (
+      <div>
+        {title}
+        {description}
+      </div>
     );
   },
 

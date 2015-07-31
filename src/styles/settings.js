@@ -31,7 +31,9 @@ let _settings = {
   defaultFontFamily: '"Helvetica Neue", Helvetica, Roboto, Arial, sans-serif',
   defaultLineHeight: 1.6,
   defaultBorderRadius: 3,
-  mediumBorderRadius: 6
+  mediumBorderRadius: 6,
+
+  secondaryFontFamily: '"United Sans Cond", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif'
 };
 
 function setSettings(settings) {

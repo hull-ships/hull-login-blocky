@@ -3,7 +3,7 @@
 import React from 'react';
 import t from 'tcomb-form';
 import { translate } from '../../lib/i18n';
-import { Name, Email, Password } from '../../lib/types';
+import { Email, Password } from '../../lib/types';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
 import renderSectionContent from './render-section-content';
