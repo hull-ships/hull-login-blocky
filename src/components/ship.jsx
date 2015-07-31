@@ -129,7 +129,7 @@ export default React.createClass({
 
     let title;
     if (this.state.activeSection === 'logIn' && this.state.shipSettings.logo_image) {
-      title = <img src={this.state.shipSettings.logo_image} />;
+      title = <img style={{ maxWidth: '80%' }} src={this.state.shipSettings.logo_image} />;
     } else {
       title = <TranslatedMessage tag='h1'
         className='hull-login__modal__description__title'
@@ -144,7 +144,7 @@ export default React.createClass({
       message={name[this.state.activeSection] + ' description'} />;
 
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         {title}
         {description}
       </div>

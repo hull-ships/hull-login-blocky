@@ -254,12 +254,16 @@ export default React.createClass({
       });
 
       assign(overlayDescription, {
-        width: '50%',
+        width: 450,
+        minWidth: 450,
+        maxWidth: 450,
         display: 'table-cell'
       });
 
       assign(overlayContent, {
-        width: '50%',
+        width: 450,
+        minWidth: 450,
+        maxWidth: 450,
         display: 'table-cell'
       });
     }
