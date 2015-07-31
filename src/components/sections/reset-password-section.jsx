@@ -7,7 +7,6 @@ import { Email } from '../../lib/types';
 import Form from '../form';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
-import OrganizationImage from './organization-image';
 import { TranslatedMessage } from '../i18n';
 
 export default React.createClass({
@@ -63,13 +62,6 @@ export default React.createClass({
 
     return (
       <div>
-        <div style={styles.sectionHeader}>
-          <OrganizationImage style={styles.sectionOrganizationImage} src={this.props.shipSettings.logo_image} />
-          <TranslatedMessage tag='h1'
-            style={styles.sectionTitle}
-            message='reset password header' />
-        </div>
-
         <Form kind='compact'
           type={this.getType()}
           fields={this.getFields()}
@@ -90,4 +82,3 @@ export default React.createClass({
     );
   }
 });
-

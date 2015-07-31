@@ -8,10 +8,12 @@ import Help from '../../help';
 
 function render(Component, locals) {
   if (locals.config.kind === 'compact') {
-    return <label style={s}>
-      <Component {...locals} />
-      <Help>{locals.help}</Help>
-    </label>;
+    return (
+      <label style={s}>
+        <Component {...locals} />
+        <Help>{locals.help}</Help>
+      </label>
+    );
   }
 
   const s = { width: '100%' };
@@ -59,4 +61,3 @@ export default {
     return render(C, locals);
   }
 };
-

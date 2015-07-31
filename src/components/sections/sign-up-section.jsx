@@ -24,7 +24,6 @@ export default React.createClass({
 
   getType() {
     return t.struct({
-      name: Name,
       email: Email,
       password: Password
     });
@@ -34,12 +33,6 @@ export default React.createClass({
     let errors = (this.props.errors.signUp || {}).errors || {};
 
     return {
-      name: {
-        placeholder: translate('sign-up name placeholder'),
-        type: 'text',
-        help: <TranslatedMessage message='sign-up name help text' />,
-        hasError: !!errors.name
-      },
       email: {
         placeholder: translate('sign-up email placeholder'),
         type: 'email',
@@ -80,26 +73,9 @@ export default React.createClass({
     });
 
     const styles = getStyles();
-    let loginLink;
-    if (this.props.shipSettings.show_login) {
-      loginLink = <p style={styles.sectionText}>
-        <TranslatedMessage tag='a'
-          href='#'
-          onClick={this.props.activateLogInSection}
-          message='sign-up switch to log-in link' />
-      </p>;
-    }
 
     return (
       <div>
-        <div style={styles.sectionHeader}>
-          <TranslatedMessage tag='h1'
-            style={styles.sectionTitle}
-            message="sign-up header"
-            variables={{ organization: this.props.organization.name }} />
-          {loginLink}
-        </div>
-
         {content}
 
         <div style={styles.stickySectionFooter}>
@@ -112,4 +88,3 @@ export default React.createClass({
     );
   }
 });
-

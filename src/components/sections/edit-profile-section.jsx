@@ -7,7 +7,6 @@ import { getStyles } from './styles';
 import transform from 'tcomb-json-schema';
 import AsyncActionsMixin from '../../mixins/async-actions';
 import Form from '../form';
-import UserImage from './user-image';
 import { TranslatedMessage } from '../i18n';
 
 const DEFAULT_SCHEMA = {
@@ -105,19 +104,16 @@ export default React.createClass({
   },
 
   render() {
-    let title = '';
     let subtitle = '';
     let button = '';
     let disabled = false;
 
     if (this.props.formIsSubmitted || !this.props.hasForm) {
-      title = translate('edit profile header');
       subtitle = <a href='javascript: void 0;' onClick={this.props.activateShowProfileSection}>
         {translate('edit profile cancel button')}
       </a>;
       button = translate('edit profile button text');
     } else {
-      title = translate('edit profile header when profile incomplete');
       subtitle = <a href='javascript: void 0;' onClick={this.props.hideDialog}>
         {translate('edit profile cancel button when profile incomplete')}
       </a>;
@@ -135,12 +131,6 @@ export default React.createClass({
 
     return (
       <div>
-        <div style={styles.sectionHeader}>
-          <UserImage style={styles.sectionUserImage} src={u.picture} />
-          <h1 style={styles.sectionTitle}>{title}</h1>
-          <p style={styles.sectionText}>{subtitle}</p>
-        </div>
-
         <Form type={this.getType()}
           fields={this.getFields()}
           value={value}
@@ -148,6 +138,10 @@ export default React.createClass({
           onSubmit={this.handleSubmit}
           disabled={disabled}
           autoDisableSubmit={this.props.shipSettings.disable_buttons_automatically} />
+
+        <div style={styles.stickySectionFooter}>
+          <p style={styles.sectionText}>{subtitle}</p>
+        </div>
       </div>
     );
   }

@@ -32,9 +32,7 @@ export default React.createClass({
       { ':-ms-input-placeholder': styles.placeholder },
       { '::-webkit-input-placeholder': styles.placeholder },
 
-      { '::-moz-focus-inner': s },
-
-      { '.hull-login__modal__description': styles.overlayLeft }
+      { '::-moz-focus-inner': s }
     ];
 
     if (this.props.reset) {
@@ -48,4 +46,3 @@ export default React.createClass({
     return <Style scopeSelector={this.getSelector()} rules={this.getRules()} />;
   }
 });
-

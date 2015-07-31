@@ -6,7 +6,6 @@ import { translate } from '../../lib/i18n';
 import { Login, Password } from '../../lib/types';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
-import OrganizationImage from './organization-image';
 import renderSectionContent from './render-section-content';
 import { TranslatedMessage } from '../i18n';
 
@@ -44,7 +43,7 @@ export default React.createClass({
       password: {
         placeholder: translate('log-in password placeholder'),
         type: 'password',
-        help: <TranslatedMessage message='log-in password help text' />,
+        help: <TranslatedMessage tag='a' href='javascript: void 0;' onClick={this.props.activateResetPasswordSection} message='log-in forgot password link' />,
         hasError
       }
     };
@@ -74,41 +73,10 @@ export default React.createClass({
       disabled: d
     });
 
-    const styles = getStyles();
-
-    let signupLink;
-    if (this.props.shipSettings.show_signup) {
-      signupLink = <p style={styles.sectionText}>
-        <TranslatedMessage tag='a'
-          href='#'
-          onClick={this.props.activateSignUpSection}
-          message="log-in switch to sign-up link" />
-      </p>;
-    }
-
     return (
       <div>
-        <div style={styles.sectionHeader}>
-          <OrganizationImage style={styles.sectionOrganizationImage} src={this.props.shipSettings.logo_image} />
-          <TranslatedMessage tag='h1'
-            style={styles.sectionTitle}
-            message='log-in header'
-            variables={{ organization: this.props.organization.name }} />
-          {signupLink}
-        </div>
-
         {content}
-
-        <div style={styles.sectionFooter}>
-          <p style={styles.sectionText}>
-            <TranslatedMessage tag='a'
-              href='javascript: void 0;'
-              onClick={this.props.activateResetPasswordSection}
-              message='log-in forgot password link' />
-          </p>
-        </div>
       </div>
     );
   }
 });
-

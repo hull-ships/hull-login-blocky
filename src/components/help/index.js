@@ -1,19 +1,19 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
+
+const styles = {
+  display: 'block',
+  textAlign: 'left',
+  marginTop: 5
+};
 
 export default React.createClass({
   displayName: 'Help',
 
-  mixins: [
-    StyleResolverMixin,
-    BrowserStateMixin
-  ],
-
   render() {
-    return <span style={{display: 'block', 'textAlign': 'center', 'marginBottom': '10px'}}>
-        {this.props.children}
-    </span>;
+    return (
+      <span style={styles}>{this.props.children}</span>
+    );
   }
 });

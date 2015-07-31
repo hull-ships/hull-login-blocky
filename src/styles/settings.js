@@ -24,8 +24,8 @@ let _settings = {
   twitterColor: '#55acee',
   vkontakteColor: '#45668e',
 
-  textColor: '#aaaaaa',
-  linkColor: '#aaaaaa',
+  textColor: '#666666',
+  linkColor: '#666666',
 
   defaultFontSize: 14,
   defaultFontFamily: '"Helvetica Neue", Helvetica, Roboto, Arial, sans-serif',
@@ -48,4 +48,3 @@ export default {
   setSettings,
   getSettings
 };
-

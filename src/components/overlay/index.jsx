@@ -171,7 +171,7 @@ export default React.createClass({
       width: '100%',
       height: '100%',
       zIndex: 20000,
-      backgroundColor: 'rgba(0,0,0,.15)',
+      backgroundColor: 'rgba(0,0,0,.5)',
       opacity: 0,
       WebkitTransition: 'opacity 150ms ease-out',
       MsTransition: 'opacity 150ms ease-out',
@@ -192,8 +192,7 @@ export default React.createClass({
       msTransition: 'opacity 300ms ease-out',
       MozTransition: 'opacity 300ms ease-out',
       transition: 'opacity 300ms ease-out',
-      maxHeight: '100vh',
-      minHeight: '80vh',
+      height: 600,
       overflow: 'scroll'
     };
 
@@ -211,7 +210,7 @@ export default React.createClass({
     const overlayContent = {
       position: 'relative',
       verticalAlign: 'middle',
-      padding: '80px 40px 120px 40px'
+      padding: '0 60px'
     };
 
     const overlayCloseButton = {
@@ -249,7 +248,9 @@ export default React.createClass({
         maxWidth: 900,
         width: '100%',
         display: 'table',
-        margin: '50px auto'
+        margin: '0 auto',
+        top: '50%',
+        marginTop: -300
       });
 
       assign(overlayDescription, {
