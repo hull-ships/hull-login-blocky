@@ -3,7 +3,6 @@
 import React from 'react';
 import { getStyles } from './styles';
 import { getSettings } from '../../styles/settings';
-import UserImage from './user-image';
 import { TranslatedMessage } from '../i18n';
 
 const settings = getSettings();

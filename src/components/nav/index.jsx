@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import assign from 'object-assign';
 import { getSettings } from '../../styles/settings';
 
 export default React.createClass({
