@@ -156,7 +156,7 @@ export default React.createClass({
     const settings = getSettings();
 
     let overlayContainer = {
-      position: 'absolute',
+      position: 'fixed',
       left: 0,
       top: 0,
       width: '100%',
@@ -238,37 +238,35 @@ export default React.createClass({
       ]
     };
 
-    if (this.state.viewport === 'normal') {
-      assign(overlayBackground, {
-        position: 'fixed',
-        overflowX: 'hidden',
-        overflowY: 'auto'
-      });
+    assign(overlayBackground, {
+      position: 'fixed',
+      overflowX: 'hidden',
+      overflowY: 'auto'
+    });
 
-      assign(overlay, {
-        boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-        maxWidth: 900,
-        width: '100%',
-        display: 'table',
-        margin: '0 auto',
-        top: '50%',
-        marginTop: -300
-      });
+    assign(overlay, {
+      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+      maxWidth: 900,
+      width: '100%',
+      display: 'table',
+      margin: '0 auto',
+      top: '50%',
+      marginTop: -300
+    });
 
-      assign(overlayDescription, {
-        width: 450,
-        minWidth: 450,
-        maxWidth: 450,
-        display: 'table-cell'
-      });
+    assign(overlayDescription, {
+      width: 450,
+      minWidth: 450,
+      maxWidth: 450,
+      display: 'table-cell'
+    });
 
-      assign(overlayContent, {
-        width: 450,
-        minWidth: 450,
-        maxWidth: 450,
-        display: 'table-cell'
-      });
-    }
+    assign(overlayContent, {
+      width: 450,
+      minWidth: 450,
+      maxWidth: 450,
+      display: 'table-cell'
+    });
 
     const overlayParagraph = {
       color: '#fff',
