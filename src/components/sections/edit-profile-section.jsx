@@ -13,21 +13,17 @@ const DEFAULT_SCHEMA = {
   '$schema': 'http://json-schema.org/draft-04/schema#',
   'type': 'object',
   'properties': {
-    'name': {
+    'email': {
       'type': 'string',
-      'title': translate('edit profile name field')
+      'title': translate('edit profile email field'),
+      'format': 'email',
+      'minLength': 1
     },
     'password': {
       'type': 'string',
       'title': translate('edit profile password field'),
       'format': 'password',
       'help': <TranslatedMessage message='edit profile password help text' />
-    },
-    'email': {
-      'type': 'string',
-      'title': translate('edit profile email field'),
-      'format': 'email',
-      'minLength': 1
     }
   },
   'required': [
