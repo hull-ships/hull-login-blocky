@@ -101,7 +101,7 @@ function getStyles() {
   };
 
   const placeholder = {
-    color: settings.grayColor
+    color: `${settings.grayDarkColor} !important`
   };
 
   const overlayLeft = {
