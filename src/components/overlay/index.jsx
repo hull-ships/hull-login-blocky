@@ -1,6 +1,5 @@
 'use strict';
 
-import Bounce from 'bounce';
 import React from 'react';
 import assign from 'object-assign';
 import { StyleResolverMixin, BrowserStateMixin } from 'radium';
@@ -69,21 +68,9 @@ export default React.createClass({
     b.style.opacity = '1';
 
     let overlay = React.findDOMNode(this.refs.overlay);
+    overlay.style.opacity = '1';
 
-    let enterTransition = new Bounce();
-    enterTransition.scale({
-      from: { x: 0.9, y: 0.9 },
-      to: { x: 1, y: 1 },
-      bounces: 1,
-      duration: 400
-    });
-
-    enterTransition.applyTo(overlay, {
-      onComplete: function() {
-        enterTransition.remove();
-        done();
-      }
-    });
+    done();
   },
 
   componentWillLeave(done) {
@@ -97,20 +84,7 @@ export default React.createClass({
     let overlay = React.findDOMNode(this.refs.overlay);
     overlay.style.opacity = '0';
 
-    let exitTransition = new Bounce();
-    exitTransition.scale({
-      from: { x: 1, y: 1 },
-      to: { x: 0.9, y: 0.9 },
-      bounces: 1,
-      duration: 400
-    });
-
-    exitTransition.applyTo(overlay, {
-      onComplete: function() {
-        exitTransition.remove();
-        done();
-      }
-    });
+    done();
   },
 
   handleMediaQueryChange() {
