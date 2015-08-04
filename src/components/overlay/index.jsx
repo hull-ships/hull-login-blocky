@@ -168,7 +168,7 @@ export default React.createClass({
     };
 
     let overlayBackground = {
-      position: 'absolute',
+      position: 'fixed',
       left: 0,
       top: 0,
       width: '100%',
@@ -183,7 +183,9 @@ export default React.createClass({
       WebkitUserSelect: 'none',
       MozUserSelect: 'none',
       MsUserSelect: 'none',
-      userSelect: 'none'
+      userSelect: 'none',
+      overflowX: 'hidden',
+      overflowY: 'auto'
     };
 
     let overlay = {
@@ -196,7 +198,17 @@ export default React.createClass({
       MozTransition: 'opacity 300ms ease-out',
       transition: 'opacity 300ms ease-out',
       minHeight: 600,
-      overflow: 'scroll'
+      overflow: 'scroll',
+      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+      maxWidth: 900,
+      width: '100%',
+      display: 'table',
+      margin: '0 auto',
+      top: '50%',
+      MozTransform: 'translateY(-50%)',
+      MsTransform: 'translateY(-50%)',
+      Webkittransform: 'translateY(-50%)',
+      transform: 'translateY(-50%)'
     };
 
     const overlayDescription = {
@@ -238,22 +250,6 @@ export default React.createClass({
         }
       ]
     };
-
-    assign(overlayBackground, {
-      position: 'fixed',
-      overflowX: 'hidden',
-      overflowY: 'auto'
-    });
-
-    assign(overlay, {
-      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-      maxWidth: 900,
-      width: '100%',
-      display: 'table',
-      margin: '0 auto',
-      top: '50%',
-      marginTop: -300
-    });
 
     assign(overlayDescription, {
       width: 450,
