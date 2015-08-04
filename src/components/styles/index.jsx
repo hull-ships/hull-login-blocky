@@ -29,8 +29,14 @@ export default React.createClass({
       { 'a:focus': styles.linkFocus },
 
       { '::-moz-placeholder': styles.placeholder },
+      { 'input::-moz-placeholder': styles.placeholder },
+      { 'textarea::-moz-placeholder': styles.placeholder },
       { ':-ms-input-placeholder': styles.placeholder },
+      { 'input:-ms-input-placeholder': styles.placeholder },
+      { 'textarea:-ms-input-placeholder': styles.placeholder },
       { '::-webkit-input-placeholder': styles.placeholder },
+      { 'input::-webkit-input-placeholder': styles.placeholder },
+      { 'textarea::-webkit-input-placeholder': styles.placeholder },
 
       { '::-moz-focus-inner': s }
     ];
