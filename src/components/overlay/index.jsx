@@ -163,7 +163,8 @@ export default React.createClass({
       height: '100%',
       display: (this.props.visible) ? 'block' : 'none',
       // Ensure that the overlay goes above the shopify admin bar
-      zIndex: 3000000000
+      zIndex: 3000000000,
+      overflow: 'auto'
     };
 
     let overlayBackground = {
