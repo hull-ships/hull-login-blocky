@@ -68,12 +68,22 @@ export default React.createClass({
 
     let items = [];
     this.props.items.forEach((value) => {
-      let href = (typeof value.action === 'string') ? value.action : '#';
-      let onClick = (typeof value.action === 'string') ? null : value.action;
+      let href;
+      let handleClick;
+
+      if (typeof value.action === 'string') {
+        href = value.action;
+      } else {
+        href = '#';
+        handleClick = function(e) {
+          e.preventDefault();
+          value.action();
+        };
+      }
 
       let item = (
         <li style={(value.current) ? styles.navItemActive : styles.navItem}>
-          <a href={href} style={styles.navItemTitle} onClick={onClick}>{value.name}</a>
+          <a href={href} style={styles.navItemTitle} onClick={handleClick}>{value.name}</a>
         </li>
       );
 
