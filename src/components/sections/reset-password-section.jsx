@@ -70,7 +70,7 @@ export default React.createClass({
           disabled={d}
           autoDisableSubmit={this.props.shipSettings.disable_buttons_automatically} />
 
-        <div style={styles.sectionFooter}>
+        <div style={styles.stickySectionFooter}>
           <p style={styles.sectionText}>
             <TranslatedMessage tag='a'
               href='#'
