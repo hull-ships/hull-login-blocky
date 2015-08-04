@@ -27,7 +27,7 @@ const stickySectionFooter = {
   bottom: 0,
   left: 0,
   right: 0,
-  padding: 40
+  padding: 30
 };
 
 function getStyles() {
@@ -54,4 +54,3 @@ function getStyles() {
 export default {
   getStyles
 };
-

@@ -97,9 +97,8 @@ export default React.createClass({
         </div>;
       }
 
-
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} style={{ padding: '60px 0' }}>
           {form}
           <Button style={s}
             type='submit'
@@ -112,7 +111,7 @@ export default React.createClass({
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} style={{ padding: '60px 0' }}>
         <TCombForm ref='form'
           type={this.props.type}
           options={options}
@@ -123,4 +122,3 @@ export default React.createClass({
     );
   }
 });
-
