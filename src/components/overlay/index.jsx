@@ -84,7 +84,7 @@ export default React.createClass({
     let overlay = React.findDOMNode(this.refs.overlay);
     overlay.style.opacity = '0';
 
-    done();
+    setTimeout(done, 300);
   },
 
   handleMediaQueryChange() {
