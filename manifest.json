@@ -1,6 +1,6 @@
 {
-  "name": "Login",
-  "description": "A complete user registration and social login modal",
+  "name": "TSL Login",
+  "description": "A login dialog designed fo TSL",
   "picture": "picture.png",
   "index": "ship.js",
   "version": "0.0.1",
@@ -120,13 +120,20 @@
       "default": false
     },
     {
-      "name":"show_sign_up_section_after",
+      "name": "show_sign_up_section_after",
       "title": "Show sign up section delay",
       "description": "This is the wait time (in seconds) before automatically showing the sign-up section to unregistered visitors (once per user). 0 seconds disables the pop-up.",
       "type": "number",
       "format": "number",
       "minimum": 0,
       "default": 2
+    },
+    {
+      "name": "show_thanks_section_after_sign_up",
+      "title": "Show thanks section after sign up",
+      "description": "This show a thanks message at the end of the sign up flow.",
+      "type": "boolean",
+      "default": false
     },
     {
       "name":"hide_thanks_section_after",

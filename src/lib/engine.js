@@ -71,6 +71,10 @@ function Engine(deployment) {
     if (nextUser.id !== previousUser.id) { this.fetchShip(); }
   });
 
+  _.each(this.getActions(), function(a, k) {
+    Hull.on('hull.login.' + k, a);
+  });
+
   this.emitChange();
 
   const showSignUpSection = Hull.utils.cookies(this.getCookieKey('shown')) !== 'true';
@@ -335,6 +339,8 @@ assign(Engine.prototype, EventEmitter.prototype, {
   },
 
   updateUser(value) {
+    let formWasSubmitted = this.formIsSubmitted();
+
     let user = _.reduce(['name', 'email', 'password'], (m, k) => {
       let v = value[k];
       if (typeof v === 'string' && v.trim() !== '') { m[k] = v; }
@@ -364,7 +370,7 @@ assign(Engine.prototype, EventEmitter.prototype, {
     }
 
     let r = Promise.all(promises).then(() => {
-      if (this.formIsSubmitted()) {
+      if (formWasSubmitted) {
         this.activateShowProfileSection();
       } else {
         this.activateThanksSectionAndHideLater();
@@ -425,10 +431,12 @@ assign(Engine.prototype, EventEmitter.prototype, {
   },
 
   activateThanksSectionAndHideLater() {
+    if (!this._ship.settings.show_thanks_section_after_sign_up) { this.hideDialog(); }
+
     this._activeSection = 'thanks';
     this.emitChange();
 
-    const t = this._ship.settings.hide_thanks_section_after;
+    let t = this._ship.settings.hide_thanks_section_after;
 
     if (t > 0) { this.hideLater(t); }
   },
