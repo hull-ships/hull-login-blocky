@@ -133,7 +133,7 @@
       "title": "Show thanks section after sign up",
       "description": "This show a thanks message at the end of the sign up flow.",
       "type": "boolean",
-      "default": false
+      "default": true
     },
     {
       "name":"hide_thanks_section_after",
@@ -147,6 +147,13 @@
       "name":"show_login",
       "title": "Display log in link",
       "description": "When logged out, show a 'log in' link.",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "name":"show_logout",
+      "title": "Display log out link",
+      "description": "When logged in, show a 'log out' link.",
       "type": "boolean",
       "default": true
     },
