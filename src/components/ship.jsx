@@ -191,12 +191,14 @@ export default React.createClass({
         }
       }
 
-      let b = <TranslatedMessage tag='a'
-        href='#'
-        className='hull-login__button hull-login__button--log-out'
-        onClick={this.props.actions.logOut}
-        message='nav logout link' />;
-      buttons.push(b);
+      if (this.state.shipSettings.show_logout) {
+        let b = <TranslatedMessage tag='a'
+          href='#'
+          className='hull-login__button hull-login__button--log-out'
+          onClick={this.props.actions.logOut}
+          message='nav logout link' />;
+        buttons.push(b);
+      }
     } else {
       if (this.state.shipSettings.show_login) {
         let b = <TranslatedMessage tag='a'
