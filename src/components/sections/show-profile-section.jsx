@@ -53,7 +53,7 @@ export default React.createClass({
     const styles = getStyles();
 
     return (
-      <div>
+      <div style={{ padding: '60px 0' }}>
         {this.renderProfile()}
 
         <div style={styles.stickySectionFooter}>

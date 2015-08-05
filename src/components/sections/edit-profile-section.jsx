@@ -126,7 +126,7 @@ export default React.createClass({
     let styles = getStyles();
 
     return (
-      <div>
+      <div style={{ padding: '60px 0' }}>
         <Form type={this.getType()}
           fields={this.getFields()}
           value={value}
