@@ -49,6 +49,12 @@ const STATUS = {
 
 const EVENT = 'CHANGE';
 
+const FACEBOOK_FIELDS = [
+  'first_name',
+  'last_name',
+  'education'
+];
+
 function Engine(deployment) {
   this._ship = deployment.ship;
   this._platform = deployment.platform;
@@ -58,6 +64,8 @@ function Engine(deployment) {
 
   this.resetState();
   this.resetUser();
+
+  if (this._identities.facebook) { this.fetchFacebookProfile(); }
 
   Hull.on('hull.user.**', (user) => {
     // Ignore the events that come from actions.
@@ -80,7 +88,7 @@ function Engine(deployment) {
   if (showSignUpSection && t > 0) { this.showLater(t, 'signUp'); }
 }
 
-assign(Engine.prototype, EventEmitter.prototype, {
+Engine.prototype = assign({}, EventEmitter.prototype, {
   getCookieKey(key) {
     return this._ship.id + key;
   },
@@ -116,7 +124,8 @@ assign(Engine.prototype, EventEmitter.prototype, {
       isLinking: this._isLinking,
       isUnlinking: this._isUnlinking,
       dialogIsVisible: this._dialogIsVisible,
-      activeSection: this.getActiveSection()
+      activeSection: this.getActiveSection(),
+      facebookProfile: this._facebookProfile
     };
   },
 
@@ -129,7 +138,13 @@ assign(Engine.prototype, EventEmitter.prototype, {
   },
 
   emitChange() {
-    this.emit(EVENT);
+    // Ensure that the facebook profile is fetched before showing the dialog.
+    let p = this._fetchFacebookProfilePromise;
+    if (p) {
+      p.then(() => { this.emit(EVENT); });
+    } else {
+      this.emit(EVENT);
+    }
   },
 
   resetState() {
@@ -155,6 +170,9 @@ assign(Engine.prototype, EventEmitter.prototype, {
     }
 
     this._identities = identities;
+
+    this._facebookProfile = {};
+    this._fetchFacebookProfilePromise = null;
   },
 
   fetchShip() {
@@ -214,6 +232,7 @@ assign(Engine.prototype, EventEmitter.prototype, {
     this.clearTimers();
 
     this._dialogIsVisible = true;
+
     this.emitChange();
   },
 
@@ -246,7 +265,12 @@ assign(Engine.prototype, EventEmitter.prototype, {
 
   logIn(providerOrCredentials) {
     return this.perform('login', providerOrCredentials).then((user) => {
-      return this.fetchShip().then(() => {
+      let p = this.fetchShip();
+      if (providerOrCredentials === 'facebook') {
+        p = Promise.all(p, this.fetchFacebookProfile());
+      }
+
+      return p.then(() => {
         let userIsNew = user.created_at === user.updated_at && user.stats.sign_in_count <= 1;
         let hasForm = this.hasForm();
 
@@ -260,6 +284,30 @@ assign(Engine.prototype, EventEmitter.prototype, {
         }
       });
     });
+  },
+
+  fetchFacebookProfile() {
+    if (this._fetchFacebookProfilePromise != null) {
+      return this._fetchFacebookProfilePromise;
+    }
+
+    let p = Hull.api({ provider: 'facebook', path: 'me' }, { fields: FACEBOOK_FIELDS.join(',') }).then((r) => {
+      let school = _.find((r.education || []), (e) => {
+        return e.type === 'College';
+      });
+
+      this._facebookProfile = {
+        first_name: r.first_name,
+        last_name: r.last_name,
+        school
+      };
+
+      return this._facebookProfile;
+    });
+
+    this._fetchFacebookProfilePromise = p;
+
+    return p;
   },
 
   logOut() {

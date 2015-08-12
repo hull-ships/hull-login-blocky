@@ -146,7 +146,11 @@ export default React.createClass({
     }
 
     let u = this.props.user;
-    let value = { ...u, ...(this.props.form.user_data && this.props.form.user_data.data) };
+    let value = {
+      ...u,
+      ...(this.props.form.user_data && this.props.form.user_data.data),
+      ...this.props.facebookProfile
+    };
     let styles = getStyles();
 
     return (
