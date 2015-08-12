@@ -5,7 +5,9 @@ import React from 'react';
 const styles = {
   display: 'block',
   textAlign: 'center',
-  marginTop: 5
+  fontSize: 12,
+  marginTop: 5,
+  opacity: 0.5
 };
 
 export default React.createClass({

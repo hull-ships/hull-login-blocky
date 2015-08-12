@@ -9,6 +9,23 @@ import AsyncActionsMixin from '../../mixins/async-actions';
 import Form from '../form';
 import { TranslatedMessage } from '../i18n';
 
+function getHelpMessage(v) {
+  if (typeof v.help === 'string') { return v.help; }
+
+  let m;
+  if (v.minLength > 1 && v.maxLength > 1) {
+    m = 'form help string between';
+  } else if (v.minLength > 1) {
+    m = 'form help string min';
+  } else if (v.maxLength) {
+    m = 'form help string max';
+  }
+
+  if (m != null) {
+    return <TranslatedMessage message={m} variables={v} />;
+  }
+}
+
 const DEFAULT_SCHEMA = {
   '$schema': 'http://json-schema.org/draft-04/schema#',
   'type': 'object',
@@ -71,10 +88,17 @@ export default React.createClass({
   getFields() {
     let errors = ((this.props.errors || {}).updateUser || {}).errors || {};
 
-    return _.reduce(this.getSchema().properties, function(m, v, k) {
+    let schema = this.getSchema();
+    return _.reduce(schema.properties, function(m, v, k) {
+      let label = v.title;
+      let isRequired = _.include(schema.required, k);
+      if (isRequired) { label += ' *'; }
+
+      let help = getHelpMessage(v);
+
       let f = {
-        label: v.title,
-        help: v.help,
+        label,
+        help,
         hasError: !!errors[k]
       };
 

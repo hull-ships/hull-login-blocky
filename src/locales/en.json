@@ -13,10 +13,14 @@
   "edit profile button text when attempting edit": "Saving...",
   "edit profile cancel button": "Cancel",
   "edit profile cancel button when profile incomplete": "Skip this step",
+  "edit profile email field": "Your email",
   "edit profile name field": "Your name",
   "edit profile password field": "Your password",
   "edit profile password help text": "Leave blank to keep your old password",
-  "edit profile email field": "Your email",
+
+  "form help string between": "must be between {minLength} and {maxLength} characters",
+  "form help string min": "must be at least {minLength} characters",
+  "form help string max": "must not be longer than {maxLength}",
 
   "view profile header": "View your profile",
   "view profile photo header": "",
