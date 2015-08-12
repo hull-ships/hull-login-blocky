@@ -68,7 +68,7 @@ export function resetPassword(data) {
       if (o + INEXISTANT_URL === response.xhr.responseURL) {
         resolve();
       } else {
-        reject(new Error('emain not found'));
+        reject(new Error('email not found'));
       }
     });
   });
