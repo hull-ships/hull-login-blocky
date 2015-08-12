@@ -31,6 +31,7 @@
   "reset password button text when attempting reset": "Sending...",
   "reset password button text when completed reset": "Sent",
   "reset password email placeholder": "Your email",
+  "reset invalid email error": "No account found with that email",
 
   "thanks header": "Thanks for signing up!",
   "thanks photo header": "",
@@ -50,6 +51,7 @@
   "log-in button text when attempting login": "Logging in",
   "log-in switch to sign-up link": "Don't have an account? Sign up!",
   "log-in forgot password link": "Forgot password?",
+  "log-in invalid credentials error": "Invalid email or password",
 
   "sign-up header": "Sign up for {organization}",
   "sign-up photo header": "",
@@ -66,6 +68,7 @@
   "sign-up password placeholder": "Your password",
   "sign-up password help text": "",
   "sign-up switch to log-in link": "Already have an account? Log in.",
+  "sign-up email taken error": "Email is already taken",
 
   "log-in help text for Angellist": "",
   "log-in help text for Facebook": "",

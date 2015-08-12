@@ -37,7 +37,8 @@ export default React.createClass({
         placeholder: translate('sign-up email placeholder'),
         type: 'email',
         help: <TranslatedMessage message='sign-up email help text' />,
-        hasError: !!errors.email
+        hasError: !!errors.email,
+        error: errors.email && <TranslatedMessage message='sign-up email taken error' />
       },
       password: {
         placeholder: translate('sign-up password placeholder'),

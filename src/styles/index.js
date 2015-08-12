@@ -6,6 +6,19 @@ import { getSettings } from './settings';
 function getStyles() {
   const settings = getSettings();
 
+  const base = {
+    fontFamily: settings.defaultFontFamily,
+    fontSize: settings.defaultFontSize,
+    fontSizeAjust: 'none',
+    fontStyle: 'normal',
+    fontVariant: 'normal',
+    fontWeight: 'normal',
+
+    lineHeight: settings.defaultLineHeight,
+
+    color: settings.textColor
+  };
+
   const reset = {
     WebkitBoxSizing: 'border-box',
     MozBoxSizing: 'border-box',
@@ -47,20 +60,9 @@ function getStyles() {
 
     boxShadow: 'none',
 
-    color: settings.textColor,
-
     background: 'none',
     backgroundColor: 'transparent',
     backgroundImage: 'none',
-
-    fontFamily: settings.defaultFontFamily,
-    fontSize: settings.defaultFontSize,
-    fontSizeAjust: 'none',
-    fontStyle: 'normal',
-    fontVariant: 'normal',
-    fontWeight: 'normal',
-
-    lineHeight: settings.defaultLineHeight,
 
     textAlign: 'left',
     textDecoration: 'none',
@@ -109,6 +111,7 @@ function getStyles() {
   };
 
   return {
+    base,
     reset,
     link,
     linkHover,

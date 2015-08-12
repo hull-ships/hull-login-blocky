@@ -8,6 +8,7 @@ function compileMessages() {
   _messages = {};
 
   let mf = new MessageFormat(_locale);
+
   for (let k in _translations[_locale]) {
     if (_translations[_locale].hasOwnProperty(k)) {
       _messages[k] = mf.compile(_translations[_locale][k]);

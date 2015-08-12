@@ -38,7 +38,8 @@ export default React.createClass({
         placeholder: translate('log-in email placeholder'),
         type: 'text',
         help: <TranslatedMessage message='log-in email help text' />,
-        hasError
+        hasError,
+        error: e && <TranslatedMessage message='log-in invalid credentials error' />
       },
       password: {
         placeholder: translate('log-in password placeholder'),

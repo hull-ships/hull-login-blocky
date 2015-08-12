@@ -35,7 +35,8 @@ export default React.createClass({
       email: {
         placeholder: translate('reset password email placeholder'),
         type: 'email',
-        hasError
+        hasError,
+        error: hasError && <TranslatedMessage message='reset invalid email error' />
       }
     };
   },
