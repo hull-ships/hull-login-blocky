@@ -78,7 +78,7 @@ function getStyles() {
     color: '#FF6262',
     fontSize: 12,
     marginTop: 5
-  }
+  };
 
   return {
     formButton,
