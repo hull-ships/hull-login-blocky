@@ -67,7 +67,7 @@ export default React.createClass({
     let styles = this.getStyles();
 
     let items = [];
-    this.props.items.forEach((value) => {
+    this.props.items.forEach((value, k) => {
       let href;
       let handleClick;
 
@@ -81,8 +81,10 @@ export default React.createClass({
         };
       }
 
+
+      let key = `item-${k}`;
       let item = (
-        <li style={(value.current) ? styles.navItemActive : styles.navItem}>
+        <li key={key} style={(value.current) ? styles.navItemActive : styles.navItem}>
           <a href={href} style={styles.navItemTitle} onClick={handleClick}>{value.name}</a>
         </li>
       );

@@ -38,7 +38,6 @@ export function logIn(data) {
 
 export function signUp(data) {
   let url = document.location.origin + '/account';
-
   return new Promise((resolve, reject) => {
     superagent.post(url).type('form').send({
       'form_types': 'create_customer',
@@ -64,11 +63,18 @@ export function resetPassword(data) {
       'return_to': INEXISTANT_URL,
       ...data
     }).end((error, response) => {
-      // When reset succeeds, the user is redirected to `return_to` value.
-      if (o + INEXISTANT_URL === response.xhr.responseURL) {
-        resolve();
-      } else {
-        reject(new Error('email not found'));
+      switch(response.status) {
+        case 404:
+          // We are redirected to our dummy URL,
+          // which means that we're good
+          resolve(true)
+          break;
+        case 429:
+          reject(new Error('reset password too many requests error'));
+          break;
+        case 200:
+          reject(new Error('reset password invalid email error'));
+          break;
       }
     });
   });

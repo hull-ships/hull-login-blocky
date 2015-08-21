@@ -34,8 +34,10 @@
   "reset password button text": "Send reset instructions",
   "reset password button text when attempting reset": "Sending...",
   "reset password button text when completed reset": "Sent",
+  "reset password message when completed reset" : "We've sent you an email with a link to update your password.",
   "reset password email placeholder": "Your email",
-  "reset invalid email error": "No account found with that email",
+  "reset password invalid email error": "No account found with that email",
+  "reset password too many requests error" : "Too many login attempts: Please try again in 10 minutes",
 
   "thanks header": "Thanks for signing up!",
   "thanks photo header": "",
@@ -49,7 +51,7 @@
   "log-in social button text when attempting login": "Logging in with {provider}",
   "log-in email placeholder": "Your email or username",
   "log-in email help text": "",
-  "log-in password placeholder": "log-in password placeholder",
+  "log-in password placeholder": "Your password",
   "log-in password help text": "",
   "log-in button text": "Log in",
   "log-in button text when attempting login": "Logging in",
@@ -71,6 +73,7 @@
   "sign-up email help text": "",
   "sign-up password placeholder": "Your password",
   "sign-up password help text": "",
+  "sign-up password too short error" : "password is too short (minimum is 5 characters).",
   "sign-up switch to log-in link": "Already have an account? Log in.",
   "sign-up email taken error": "Email is already taken",
 

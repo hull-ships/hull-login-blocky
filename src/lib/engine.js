@@ -31,7 +31,8 @@ const ACTIONS = [
   'activateSignUpSection',
   'activateResetPasswordSection',
   'activateShowProfileSection',
-  'activateEditProfileSection'
+  'activateEditProfileSection',
+  'updateCurrentEmail'
 ];
 
 const METHODS = {
@@ -125,7 +126,8 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
       isUnlinking: this._isUnlinking,
       dialogIsVisible: this._dialogIsVisible,
       activeSection: this.getActiveSection(),
-      facebookProfile: this._facebookProfile
+      facebookProfile: this._facebookProfile,
+      currentEmail: this._currentEmail
     };
   },
 
@@ -157,6 +159,7 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
     this._isUnlinking = false;
     this._dialogIsVisible = false;
     this._activeSection = 'logIn';
+    this._currentEmail = '';
   },
 
   resetUser() {
@@ -390,6 +393,9 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
 
   resetPassword(email) {
     let r;
+    this._errors.resetPassword = null;
+    this.emitChange();
+
     if (this.isShopifyCustomer()) {
       r = shopiform.resetPassword({ email });
     } else {
@@ -398,7 +404,6 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
 
     r.catch((error) => {
       this._errors.resetPassword = error;
-
       this.emitChange();
     });
 
@@ -468,6 +473,10 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
     } else {
       document.location.href = location;
     }
+  },
+
+  updateCurrentEmail(value) {
+    this._currentEmail = value;
   },
 
   activateLogInSection() {

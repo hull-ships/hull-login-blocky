@@ -34,7 +34,7 @@ export default React.createClass({
     let rtn;
     if (this.props.allowHTML) {
       let props = assign({
-        'class': this.props.className,
+        className: this.props.className,
         dangerouslySetInnerHTML: {
           __html: translation // TODO DOMPurify
         }

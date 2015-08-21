@@ -54,6 +54,14 @@ export default React.createClass({
     this.getAsyncAction('logIn')(value);
   },
 
+
+  handleChange(changes) {
+    let { value: { login: email } } = changes;
+    if (email) {
+      this.props.updateCurrentEmail(email);
+    }
+  },
+
   render() {
     let m;
     let d;
@@ -71,6 +79,7 @@ export default React.createClass({
       fields: this.getFields(),
       submitMessage: m,
       onSubmit: this.handleSubmit,
+      onChange: this.handleChange,
       disabled: d
     });
 

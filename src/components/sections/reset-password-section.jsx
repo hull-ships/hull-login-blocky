@@ -16,6 +16,10 @@ export default React.createClass({
     AsyncActionsMixin
   ],
 
+  getInitialState() {
+    return { displayErrors: false }
+  },
+
   getAsyncActions() {
     return {
       resetPassword: this.props.resetPassword
@@ -29,25 +33,33 @@ export default React.createClass({
   },
 
   getFields() {
-    let hasError = this.props.errors.resetPassword != null;
+    let hasError = this.state.displayErrors && this.props.errors.resetPassword != null;
+    let help = (this.state.resetPasswordState === 'done') && <TranslatedMessage message='reset password message when completed reset' />;
+    let errorMessage = this.props.errors.resetPassword && this.props.errors.resetPassword.message;
 
     return {
       email: {
         placeholder: translate('reset password email placeholder'),
         type: 'email',
         hasError,
-        error: hasError && <TranslatedMessage message='reset invalid email error' />
+        error: hasError && <TranslatedMessage message={errorMessage} />,
+        help
       }
     };
   },
 
   handleSubmit(value) {
+    this.setState({ displayErrors: true });
     this.getAsyncAction('resetPassword')(value.email);
   },
 
+  handleChange(value) {
+    this.setState({ displayErrors: false });
+  },
+
   render() {
-    let m;
-    let d;
+    let m, d;
+
     if (this.state.resetPasswordState === 'done') {
       m = translate('reset password button text when completed reset');
       d = true;
@@ -59,6 +71,9 @@ export default React.createClass({
       d = false;
     }
 
+
+
+
     const styles = getStyles();
 
     return (
@@ -68,6 +83,7 @@ export default React.createClass({
           fields={this.getFields()}
           submitMessage={m}
           onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
           disabled={d}
           autoDisableSubmit={this.props.shipSettings.disable_buttons_automatically} />
 

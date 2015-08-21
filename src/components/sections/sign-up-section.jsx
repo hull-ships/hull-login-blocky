@@ -44,7 +44,8 @@ export default React.createClass({
         placeholder: translate('sign-up password placeholder'),
         type: 'password',
         help: <TranslatedMessage message='sign-up password help text' />,
-        hasError: !!errors.password
+        hasError: !!errors.password,
+        error: errors.password && <TranslatedMessage message='sign-up password too short error' />
       }
     };
   },

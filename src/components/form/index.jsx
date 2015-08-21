@@ -55,8 +55,11 @@ export default React.createClass({
   },
 
   handleChange(value) {
-    this.setState({ value });
-    this.setState({ valid: this.refs.form.getValue() !== null });
+    let changes = { value, valid: this.refs.form.getValue() !== null }
+    this.setState(changes);
+    if (this.props.onChange) {
+      this.props.onChange(changes);
+    }
   },
 
   handleSubmit(e) {
