@@ -8,6 +8,7 @@ import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
 import renderSectionContent from './render-section-content';
 import { TranslatedMessage } from '../i18n';
+import SocialLoginErrors from '../social-login-errors';
 
 export default React.createClass({
   displayName: 'LogInSection',
@@ -15,6 +16,10 @@ export default React.createClass({
   mixins: [
     AsyncActionsMixin
   ],
+
+  getInitialState() {
+    return { displayErrors: false };
+  },
 
   getAsyncActions() {
     return {
@@ -31,7 +36,8 @@ export default React.createClass({
 
   getFields() {
     const e = this.props.errors.logIn;
-    const hasError = e && e.provider === 'classic';
+    const { displayErrors } = this.state
+    const hasError = displayErrors && e && e.provider === 'classic';
 
     return {
       login: {
@@ -51,10 +57,12 @@ export default React.createClass({
   },
 
   handleSubmit(value) {
+    this.setState({ displayErrors: true });
     this.getAsyncAction('logIn')(value);
   },
 
   handleChange(changes) {
+    this.setState({ displayErrors: false });
     let { login } = changes.value;
     if (login) {
       this.props.updateCurrentEmail(login);
@@ -71,7 +79,6 @@ export default React.createClass({
       m = translate('log-in button text');
       d = false;
     }
-
     let content = renderSectionContent(this.props, {
       kind: 'compact',
       type: this.getType(),
@@ -87,8 +94,8 @@ export default React.createClass({
 
     return (
       <div>
+        <SocialLoginErrors {...this.props} />
         {content}
-
         <div style={styles.stickySectionFooter}>
           <p style={styles.sectionText}>
             <TranslatedMessage tag='a' href='javascript: void 0;' onClick={this.props.activateResetPasswordSection} message='log-in forgot password link' />

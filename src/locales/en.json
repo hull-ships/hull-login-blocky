@@ -75,7 +75,8 @@
   "sign-up password help text": "",
   "sign-up password too short error" : "password is too short (minimum is 5 characters).",
   "sign-up switch to log-in link": "Already have an account? Log in.",
-  "sign-up email taken error": "Email is already taken",
+  "sign-up email has already been taken error": "Email has already been taken",
+  "sign-up email is invalid error": "Email is invalid",
 
   "log-in help text for Angellist": "",
   "log-in help text for Facebook": "",
@@ -100,6 +101,13 @@
   "sign-up help text for Tumblr": "",
   "sign-up help text for Twitter": "",
   "sign-up help text for Vkontakte": "",
+
+  "social-login error auth_failed" : "Authentication failed",
+  "social-login error email_taken": "Email has already been taken",
+  "social-login error window_closed": "Window closed",
+  "social-login error identity_taken": "Identity has already been taken",
+  "social-login error auth_failed": "Authentication failed",
+  "social-login error unknown": "Authentication failed",
 
   "Unlink your {provider} account": "Unlink your {provider} account",
   "Unlinking {provider} account": "Unlinking {provider} account",

@@ -7,6 +7,7 @@ import { Email, Password } from '../../lib/types';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
 import renderSectionContent from './render-section-content';
+import SocialLoginErrors from '../social-login-errors';
 import { TranslatedMessage } from '../i18n';
 
 export default React.createClass({
@@ -15,6 +16,10 @@ export default React.createClass({
   mixins: [
     AsyncActionsMixin
   ],
+
+  getInitialState() {
+    return { displayErrors: false };
+  },
 
   getAsyncActions() {
     return {
@@ -30,31 +35,34 @@ export default React.createClass({
   },
 
   getFields() {
-    let errors = (this.props.errors.signUp || {}).errors || {};
+    let { displayErrors } = this.state;
+    let errors = ((this.props.errors.signUp || {}).errors || {});
 
     return {
       email: {
         placeholder: translate('sign-up email placeholder'),
         type: 'email',
         help: <TranslatedMessage message='sign-up email help text' />,
-        hasError: !!errors.email,
-        error: errors.email && <TranslatedMessage message='sign-up email taken error' />
+        hasError: displayErrors && !!errors.email,
+        error: displayErrors && errors.email && <TranslatedMessage message={['sign-up email', errors.email, 'error'].join(' ')} />
       },
       password: {
         placeholder: translate('sign-up password placeholder'),
         type: 'password',
         help: <TranslatedMessage message='sign-up password help text' />,
-        hasError: !!errors.password,
-        error: errors.password && <TranslatedMessage message='sign-up password too short error' />
+        hasError: displayErrors && !!errors.password,
+        error: displayErrors && errors.password && <TranslatedMessage message='sign-up password too short error' />
       }
     };
   },
 
   handleSubmit(value) {
+    this.setState({ displayErrors: true });
     this.getAsyncAction('signUp')(value);
   },
 
   handleChange(changes) {
+    this.setState({ displayErrors: false });
     let { email } = changes.value;
     if (email) {
       this.props.updateCurrentEmail(email);
@@ -86,9 +94,9 @@ export default React.createClass({
     const styles = getStyles();
 
     return (
-      <div>
+      <div className='sign-up-section'>
+        <SocialLoginErrors {...this.props} />
         {content}
-
         <div style={styles.stickySectionFooter}>
           <TranslatedMessage tag='p'
             style={styles.sectionText}
