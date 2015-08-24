@@ -185,24 +185,29 @@ export default React.createClass({
       transform: 'translateY(-50%)'
     };
 
-    const overlayDescription = {
+    let overlayDescription = {
       position: 'relative',
       width: '100%',
       padding: '0 60px',
       verticalAlign: 'middle',
-      textAlign: 'center',
-      backgroundImage: 'url(' + this.props.image + ')',
-      backgroundPosition: 'center top',
-      backgroundSize: 'cover'
+      textAlign: 'center'
     };
 
-    const overlayContent = {
+    if (this.props.image && this.props.image.match(/^http/)) {
+      assign(overlayDescription, {
+        backgroundImage: 'url(' + this.props.image + ')',
+        backgroundPosition: 'center top',
+        backgroundSize: 'cover'
+      })
+    }
+
+    let overlayContent = {
       position: 'relative',
       verticalAlign: 'middle',
       padding: '30px 60px'
     };
 
-    const overlayCloseButton = {
+    let overlayCloseButton = {
       position: 'absolute',
       textAlign: 'left',
       verticalAlign: 'top',
@@ -239,7 +244,7 @@ export default React.createClass({
       display: 'table-cell'
     });
 
-    const overlayParagraph = {
+    let overlayParagraph = {
       color: '#fff',
       textAlign: 'center'
     };
