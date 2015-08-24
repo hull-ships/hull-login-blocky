@@ -13,7 +13,7 @@ var moment = require("moment");
 var sourceFolder = "src";
 var outputFolder = "dist";
 var assetsFolder = "";
-var serverPort   = process.env.PORT||8081;
+var serverPort   = process.env.PORT||8084;
 var previewUrl   = "http://localhost:"+serverPort;
 
 var hotReload = true;
