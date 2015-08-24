@@ -26,23 +26,25 @@ function getHelpMessage(v) {
   }
 }
 
-const DEFAULT_SCHEMA = {
-  '$schema': 'http://json-schema.org/draft-04/schema#',
-  'type': 'object',
-  'properties': {
-    'first_name': {
-      'type': 'string',
-      'title': translate('edit profile first_name field')
+function getDefaultSchema() {
+  return {
+    '$schema': 'http://json-schema.org/draft-04/schema#',
+    'type': 'object',
+    'properties': {
+      'first_name': {
+        'type': 'string',
+        'title': translate('edit profile first_name field')
+      },
+      'last_name': {
+        'type': 'string',
+        'title': translate('edit profile last_name field')
+      }
     },
-    'last_name': {
-      'type': 'string',
-      'title': translate('edit profile last_name field')
-    }
-  },
-  'required': [
-    'first_name',
-    'last_name'
-  ]
+    'required': [
+      'first_name',
+      'last_name'
+    ]
+  };
 };
 
 export default React.createClass({
@@ -59,11 +61,13 @@ export default React.createClass({
   },
 
   getSchema() {
-    if (this.props.hasForm) {
-      return this.props.form.fields_schema;
+    let schema;
+    if (this.props.hasForm && this.props.form.fields_schema) {
+      schema = this.props.form.fields_schema;
     } else {
-      return DEFAULT_SCHEMA;
+      schema = getDefaultSchema();
     }
+    return schema;
   },
 
   getType() {

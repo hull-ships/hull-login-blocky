@@ -1,5 +1,6 @@
 import MessageFormat from 'messageformat';
 
+let _initialized = false;
 let _translations = {};
 let _locale = 'en';
 let _messages = {};
@@ -18,7 +19,7 @@ function compileMessages() {
 
 function setTranslations(translations) {
   _translations = translations;
-
+  _initialized = true;
   compileMessages();
 }
 
@@ -29,6 +30,11 @@ function setLocale(locale) {
 }
 
 function translate(message, data) {
+  if (!_initialized) {
+    console.warn('[i18n] translations not initialized yet - translating "' + message + '"');
+    return message;
+  }
+
   let m = _messages[message];
 
   if (m == null) {
