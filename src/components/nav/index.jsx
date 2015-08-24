@@ -20,6 +20,8 @@ export default React.createClass({
   getStyles() {
     let settings = getSettings();
 
+    let items = this.props.items || [];
+
     const ul = {
       position: 'absolute',
       top: 0,
@@ -29,10 +31,13 @@ export default React.createClass({
       listStyle: 'none'
     };
 
+    const itemWidth = items.length ? (100 / items.length) : 100;
+
+
     const navItem = {
-      display: 'block',
+      'display': 'block',
       'float': 'left',
-      width: '' + (100 / this.props.items.length) + '%'
+      'width': '' + (itemWidth) + '%'
     };
 
     const navItemActive = {
@@ -67,32 +72,35 @@ export default React.createClass({
     let styles = this.getStyles();
 
     let items = [];
-    this.props.items.forEach((value, k) => {
-      let href;
-      let handleClick;
 
-      if (typeof value.action === 'string') {
-        href = value.action;
-      } else {
-        href = '#';
-        handleClick = function(e) {
-          e.preventDefault();
-          value.action();
-        };
-      }
+    if (this.props.items && this.props.items.length) {
+      this.props.items.forEach((value, k) => {
+        let href;
+        let handleClick;
+
+        if (typeof value.action === 'string') {
+          href = value.action;
+        } else {
+          href = '#';
+          handleClick = function(e) {
+            e.preventDefault();
+            value.action();
+          };
+        }
 
 
-      let key = `item-${k}`;
-      let item = (
-        <li key={key} style={(value.current) ? styles.navItemActive : styles.navItem}>
-          <a href={href} style={styles.navItemTitle} onClick={handleClick}>{value.name}</a>
-        </li>
-      );
+        let key = `item-${k}`;
+        let item = (
+          <li key={key} style={(value.current) ? styles.navItemActive : styles.navItem}>
+            <a href={href} style={styles.navItemTitle} onClick={handleClick}>{value.name}</a>
+          </li>
+        );
 
-      items.push(item);
-    });
+        items.push(item);
+      });
+    }
 
-    if (items.length === 0) {
+    if (!items || items.length === 0) {
       return null;
     }
 
