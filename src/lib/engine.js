@@ -413,7 +413,7 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
   updateUser(value) {
     let formWasSubmitted = this.formIsSubmitted();
 
-    let user = _.reduce(['name', 'email', 'password'], (m, k) => {
+    let user = _.reduce(['name', 'email', 'password', 'first_name', 'last_name'], (m, k) => {
       let v = value[k];
       if (typeof v === 'string' && v.trim() !== '') { m[k] = v; }
 

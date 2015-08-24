@@ -22,7 +22,7 @@ export default React.createClass({
         <TranslatedMessage tag='p'
           style={styles.sectionText}
           message='thanks message'
-          variables={{ name: this.props.user.name }} />
+          variables={ this.props.user } />
       </div>
     );
   }
