@@ -10,6 +10,8 @@ import Styles from './styles';
 import sections from './sections';
 import { TranslatedMessage } from './i18n';
 import { getSettings } from '../styles/settings';
+import { map, reduce } from 'underscore';
+import preloadImage from '../lib/preload-image';
 
 const name = {
   logIn: 'log-in',
@@ -19,6 +21,16 @@ const name = {
   editProfile: 'edit profile',
   thanks: 'thanks'
 };
+
+const SectionsPhotos = {
+  logIn: 'login_image',
+  signUp: 'signup_image',
+  resetPassword: 'reset_image',
+  showProfile: 'view_profile_image',
+  editProfile: 'edit_profile_image',
+  thanks: 'thanks_image'
+};
+
 
 export default React.createClass({
   displayName: 'Ship',
@@ -32,11 +44,21 @@ export default React.createClass({
   },
 
   componentWillMount() {
+    this.preloadImages();
     this.props.engine.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
     this.props.engine.removeChangeListener(this._onChange);
+  },
+
+  preloadImages() {
+    map(SectionsPhotos, (i)=> {
+      let imageUrl = this.state.shipSettings[i];
+      if (imageUrl) {
+        preloadImage(imageUrl);
+      }
+    });
   },
 
   _onChange() {
@@ -86,14 +108,11 @@ export default React.createClass({
     const overlayTitle = translate(name[this.state.activeSection] + ' header', d);
     const nav = navs[this.state.activeSection];
 
-    const photos = {
-      logIn: this.state.shipSettings.login_image,
-      signUp: this.state.shipSettings.signup_image,
-      resetPassword: this.state.shipSettings.reset_image,
-      showProfile: this.state.shipSettings.view_profile_image,
-      editProfile: this.state.shipSettings.edit_profile_image,
-      thanks: this.state.shipSettings.thanks_image
-    };
+    const photos = reduce(SectionsPhotos, (ps, v,k)=> {
+      let img = this.state.shipSettings[v];
+      if (img) ps[k] = img;
+      return ps;
+    }, {})
 
     return (
       <Overlay className={this.getScope()}
