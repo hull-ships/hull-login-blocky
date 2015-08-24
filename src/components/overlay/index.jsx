@@ -198,7 +198,7 @@ export default React.createClass({
         backgroundImage: 'url(' + this.props.image + ')',
         backgroundPosition: 'center top',
         backgroundSize: 'cover'
-      })
+      });
     }
 
     let overlayContent = {

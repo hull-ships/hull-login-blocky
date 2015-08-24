@@ -36,7 +36,7 @@ export default React.createClass({
 
   getFields() {
     const e = this.props.errors.logIn;
-    const { displayErrors } = this.state
+    const { displayErrors } = this.state;
     const hasError = displayErrors && e && e.provider === 'classic';
 
     return {

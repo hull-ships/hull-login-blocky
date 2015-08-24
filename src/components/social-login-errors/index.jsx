@@ -10,27 +10,31 @@ export default React.createClass({
     let error = this.props.errors.signUp || this.props.errors.logIn;
     if (error && error.provider && error.provider !== 'classic') {
       let { reason, message } = error;
+      let errorMessage;
       if (reason) {
         let msg = 'social-login error ' + reason;
         if (hasTranslation(msg)) {
-          return <TranslatedMessage message={msg} variables={error} />;
+          errorMessage = <TranslatedMessage message={msg} variables={error} />;
         } else {
-          return message || reason;
+          errorMessage = message || reason;
         }
       } else {
-        return message;
+        errorMessage = message;
       }
+      return errorMessage;
     }
   },
 
   render() {
     let styles = getStyles();
     let errorMessage = this.getErrorMessage();
+    let ret;
     if (errorMessage) {
-      return <div style={styles.socialLoginErrors}>{errorMessage}</div>;
+      ret = <div style={styles.socialLoginErrors}>{errorMessage}</div>;
     } else {
-      return <span />;
+      ret = <span />;
     }
 
+    return ret;
   }
-})
+});

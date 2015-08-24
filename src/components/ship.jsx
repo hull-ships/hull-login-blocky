@@ -3,7 +3,7 @@
 import React from 'react';
 import assign from 'object-assign';
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup';
-import LayeredComponentMixin from 'react-components/layered-component-mixin';
+import LayeredComponentMixin from '../lib/layered-component-mixin';
 import { translate } from '../lib/i18n';
 import Overlay from './overlay';
 import Styles from './styles';
@@ -108,11 +108,11 @@ export default React.createClass({
     const overlayTitle = translate(name[this.state.activeSection] + ' header', d);
     const nav = navs[this.state.activeSection];
 
-    const photos = reduce(SectionsPhotos, (ps, v,k)=> {
+    const photos = reduce(SectionsPhotos, (ps, v, k)=> {
       let img = this.state.shipSettings[v];
       if (img) ps[k] = img;
       return ps;
-    }, {})
+    }, {});
 
     return (
       <Overlay className={this.getScope()}
