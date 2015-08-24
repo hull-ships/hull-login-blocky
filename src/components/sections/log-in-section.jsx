@@ -54,11 +54,10 @@ export default React.createClass({
     this.getAsyncAction('logIn')(value);
   },
 
-
   handleChange(changes) {
-    let { value: { login: email } } = changes;
-    if (email) {
-      this.props.updateCurrentEmail(email);
+    let { login } = changes.value;
+    if (login) {
+      this.props.updateCurrentEmail(login);
     }
   },
 
@@ -80,7 +79,8 @@ export default React.createClass({
       submitMessage: m,
       onSubmit: this.handleSubmit,
       onChange: this.handleChange,
-      disabled: d
+      disabled: d,
+      value: { login: this.props.currentEmail }
     });
 
     const styles = getStyles();

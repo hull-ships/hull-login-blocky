@@ -63,16 +63,19 @@ export function resetPassword(data) {
       'return_to': INEXISTANT_URL,
       ...data
     }).end((error, response) => {
-      switch(response.status) {
+      switch (response.status) {
         case 404:
           // We are redirected to our dummy URL,
           // which means that we're good
-          resolve(true)
+          resolve(true);
           break;
         case 429:
           reject(new Error('reset password too many requests error'));
           break;
         case 200:
+          reject(new Error('reset password invalid email error'));
+          break;
+        default:
           reject(new Error('reset password invalid email error'));
           break;
       }

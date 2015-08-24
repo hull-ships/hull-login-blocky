@@ -17,7 +17,7 @@ export default React.createClass({
   ],
 
   getInitialState() {
-    return { displayErrors: false }
+    return { displayErrors: false };
   },
 
   getAsyncActions() {
@@ -53,12 +53,17 @@ export default React.createClass({
     this.getAsyncAction('resetPassword')(value.email);
   },
 
-  handleChange(value) {
+  handleChange(changes) {
+    let { email } = changes.value;
+    if (email) {
+      this.props.updateCurrentEmail(email);
+    }
     this.setState({ displayErrors: false });
   },
 
   render() {
-    let m, d;
+    let m;
+    let d;
 
     if (this.state.resetPasswordState === 'done') {
       m = translate('reset password button text when completed reset');
@@ -71,15 +76,13 @@ export default React.createClass({
       d = false;
     }
 
-
-
-
     const styles = getStyles();
 
     return (
       <div>
         <Form kind='compact'
           type={this.getType()}
+          value={{ email: this.props.currentEmail }}
           fields={this.getFields()}
           submitMessage={m}
           onSubmit={this.handleSubmit}

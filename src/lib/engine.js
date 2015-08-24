@@ -476,7 +476,9 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
   },
 
   updateCurrentEmail(value) {
-    this._currentEmail = value;
+    if (/@/.test(value)) {
+      this._currentEmail = value;
+    }
   },
 
   activateLogInSection() {

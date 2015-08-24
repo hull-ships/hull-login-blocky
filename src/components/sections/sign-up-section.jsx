@@ -54,6 +54,13 @@ export default React.createClass({
     this.getAsyncAction('signUp')(value);
   },
 
+  handleChange(changes) {
+    let { email } = changes.value;
+    if (email) {
+      this.props.updateCurrentEmail(email);
+    }
+  },
+
   render() {
     let m;
     let d;
@@ -71,7 +78,9 @@ export default React.createClass({
       fields: this.getFields(),
       submitMessage: m,
       onSubmit: this.handleSubmit,
-      disabled: d
+      onChange: this.handleChange,
+      disabled: d,
+      value: { email: this.props.currentEmail }
     });
 
     const styles = getStyles();
