@@ -30,22 +30,18 @@ const DEFAULT_SCHEMA = {
   '$schema': 'http://json-schema.org/draft-04/schema#',
   'type': 'object',
   'properties': {
-    'email': {
+    'first_name': {
       'type': 'string',
-      'title': translate('edit profile email field'),
-      'format': 'email',
-      'minLength': 1
+      'title': translate('edit profile first_name field')
     },
-    'password': {
+    'last_name': {
       'type': 'string',
-      'title': translate('edit profile password field'),
-      'format': 'password',
-      'help': <TranslatedMessage message='edit profile password help text' />
+      'title': translate('edit profile last_name field')
     }
   },
   'required': [
-    'name',
-    'email'
+    'first_name',
+    'last_name'
   ]
 };
 
@@ -64,21 +60,10 @@ export default React.createClass({
 
   getSchema() {
     if (this.props.hasForm) {
-      if (this.props.formIsSubmitted) {
-        return {
-          type: 'object',
-          properties: {
-            ...DEFAULT_SCHEMA.properties,
-            ...this.props.form.fields_schema.properties
-          },
-          required: DEFAULT_SCHEMA.required.concat(this.props.form.fields_schema.required)
-        };
-      }
-
       return this.props.form.fields_schema;
+    } else {
+      return DEFAULT_SCHEMA;
     }
-
-    return DEFAULT_SCHEMA;
   },
 
   getType() {
@@ -89,6 +74,7 @@ export default React.createClass({
     let errors = ((this.props.errors || {}).updateUser || {}).errors || {};
 
     let schema = this.getSchema();
+
     return _.reduce(schema.properties, function(m, v, k) {
       let label = v.title;
       let isRequired = _.include(schema.required, k);
