@@ -45,7 +45,7 @@ function getDefaultSchema() {
       'last_name'
     ]
   };
-};
+}
 
 export default React.createClass({
   displayName: 'LogInSection',

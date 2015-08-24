@@ -31,7 +31,7 @@ function setLocale(locale) {
 
 function translate(message, data) {
   if (!_initialized) {
-    console.warn('[i18n] translations not initialized yet - translating "' + message + '"');
+    console.warn('[i18n] translations not initialized yet - translating "' + message + '"'); // eslint-disable-line
     return message;
   }
 
