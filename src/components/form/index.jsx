@@ -14,6 +14,7 @@ function testPlaceholder() {
 }
 
 export default React.createClass({
+
   displayName: 'Form',
 
   getInitialState() {
@@ -54,8 +55,14 @@ export default React.createClass({
     return 'default';
   },
 
+
+  getValue() {
+    let form = this.refs.form;
+    if (form) return form.getValue();
+  },
+
   handleChange(value) {
-    let changes = { value, valid: this.refs.form.getValue() !== null };
+    let changes = { value, valid: this.getValue() !== null };
     this.setState(changes);
     if (this.props.onChange) {
       this.props.onChange(changes);
@@ -70,16 +77,22 @@ export default React.createClass({
       return;
     }
 
-    const value = this.refs.form.getValue();
+    let value = this.getValue();
     if (value) { this.props.onSubmit(value); }
   },
 
   componentDidMount() {
     this.state.enterTransition.define('slide');
+    let { value } = this.state;
+    return value && this.setState({ valid: true });
   },
 
   componentWillUnmount() {
     this.state.enterTransition.remove();
+  },
+
+  isDisabled() {
+    return !!this.props.disabled || (this.props.autoDisableSubmit && !this.state.valid);
   },
 
   render() {
@@ -90,7 +103,7 @@ export default React.createClass({
       let form;
       let disabled = false;
       if (this.state.expanded) {
-        disabled = !!this.props.disabled || (this.props.autoDisableSubmit && !this.state.valid);
+        disabled = this.isDisabled();
         form = <div style={{animation: 'slide 1s linear both'}}>
           <TCombForm ref='form'
             type={this.props.type}
@@ -120,7 +133,7 @@ export default React.createClass({
           options={options}
           value={this.state.value}
           onChange={this.handleChange} />
-        <Button style={s} type='submit' kind='primary' block={true} disabled={!!this.props.disabled || (this.props.autoDisableSubmit && !this.state.valid)}>{this.props.submitMessage}</Button>
+        <Button style={s} type='submit' kind='primary' block={true} disabled={this.isDisabled()}>{this.props.submitMessage}</Button>
       </form>
     );
   }

@@ -34,8 +34,12 @@ export default React.createClass({
 
   getFields() {
     let hasError = this.state.displayErrors && this.props.errors.resetPassword != null;
-    let help = (this.state.resetPasswordState === 'done') && <TranslatedMessage message='reset password message when completed reset' />;
     let errorMessage = this.props.errors.resetPassword && this.props.errors.resetPassword.message;
+
+    let help;
+    if (this.state.resetPasswordState === 'done') {
+      help = <TranslatedMessage message='reset password message when completed reset' />;
+    }
 
     return {
       email: {
