@@ -86,8 +86,6 @@ function Engine(deployment) {
 
   this.emitChange();
 
-
-
   let savedState = this.getSavedState();
   const showSignUpSection = !savedState.returningUser && !savedState.dialogHidden;
   const t = this._ship.settings.show_sign_up_section_after;
@@ -163,7 +161,9 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
     if (val) {
       try {
         state = JSON.parse(val);
-      } catch(err) {}
+      } catch(err) {
+        state = {};
+      }
       if (!state || (typeof state !== 'object')) {
         state = {};
       }
@@ -259,7 +259,7 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
   },
 
   showDialog() {
-    let section = this._returningUser ? "logIn" : "signUp";
+    let section = this._returningUser ? 'logIn' : 'signUp';
     return this.activateSection(section);
   },
 
