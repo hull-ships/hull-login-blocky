@@ -44,7 +44,8 @@ export default React.createClass({
         type: 'email',
         help: <TranslatedMessage message='sign-up email help text' />,
         hasError: displayErrors && !!errors.email,
-        error: displayErrors && errors.email && <TranslatedMessage message={['sign-up email', errors.email, 'error'].join(' ')} />
+        error: displayErrors && errors.email && <TranslatedMessage message={['sign-up email', errors.email, 'error'].join(' ')} />,
+        autoFocus: true
       },
       password: {
         placeholder: translate('sign-up password placeholder'),

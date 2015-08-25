@@ -43,7 +43,8 @@ export default React.createClass({
         type: 'email',
         hasError,
         error: hasError && <TranslatedMessage message={errorMessage} />,
-        help
+        help,
+        autoFocus: true
       }
     };
   },
