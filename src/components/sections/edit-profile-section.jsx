@@ -99,7 +99,7 @@ export default React.createClass({
 
       m[k] = f;
 
-      autoFocus = false
+      autoFocus = false;
 
       return m;
     }, {});
