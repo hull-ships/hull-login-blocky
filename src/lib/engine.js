@@ -56,6 +56,8 @@ const FACEBOOK_FIELDS = [
   'education'
 ];
 
+const STORAGE_KEY = 'hull-login';
+
 function Engine(deployment) {
   this._ship = deployment.ship;
   this._platform = deployment.platform;
@@ -84,15 +86,15 @@ function Engine(deployment) {
 
   this.emitChange();
 
-  const showSignUpSection = Hull.utils.cookies(this.getCookieKey('shown')) !== 'true';
+
+
+  let savedState = this.getSavedState();
+  const showSignUpSection = !savedState.returningUser && !savedState.dialogHidden;
   const t = this._ship.settings.show_sign_up_section_after;
   if (showSignUpSection && t > 0) { this.showLater(t, 'signUp'); }
 }
 
 Engine.prototype = assign({}, EventEmitter.prototype, {
-  getCookieKey(key) {
-    return this._ship.id + key;
-  },
 
   getActions() {
     if (this._actions) { return this._actions; }
@@ -149,6 +151,26 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
     }
   },
 
+  saveState(attrs) {
+    let state = assign({}, this.getSavedState(), attrs);
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return state;
+  },
+
+  getSavedState() {
+    let state = {};
+    let val = window.localStorage.getItem(STORAGE_KEY);
+    if (val) {
+      try {
+        state = JSON.parse(val);
+      } catch(err) {}
+      if (!state || (typeof state !== 'object')) {
+        state = {};
+      }
+    }
+    return state || {};
+  },
+
   resetState() {
     this.resetUser();
 
@@ -159,7 +181,10 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
     this._isUnlinking = false;
     this._dialogIsVisible = false;
     this._activeSection = 'logIn';
-    this._currentEmail = '';
+
+    let savedState = this.getSavedState();
+    this._currentEmail = savedState.currentEmail;
+    this._returningUser = savedState.returningUser;
   },
 
   resetUser() {
@@ -167,6 +192,8 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
 
     let identities = {};
     if (this._user != null) {
+      this.saveState({ returningUser: true });
+      this.updateCurrentEmail(this._user.email);
       this._user.identities.forEach(function(identity) {
         identities[identity.provider] = true;
       });
@@ -232,15 +259,12 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
   },
 
   showDialog() {
-    this.clearTimers();
-
-    this._dialogIsVisible = true;
-
-    this.emitChange();
+    let section = this._returningUser ? "logIn" : "signUp";
+    return this.activateSection(section);
   },
 
   hideDialog() {
-    Hull.utils.cookies(this.getCookieKey('shown'), true);
+    this.saveState({ dialogHidden: true });
 
     this.clearTimers();
 
@@ -478,6 +502,7 @@ Engine.prototype = assign({}, EventEmitter.prototype, {
   updateCurrentEmail(value) {
     if (/@/.test(value)) {
       this._currentEmail = value;
+      this.saveState({ currentEmail: value });
     }
   },
 
