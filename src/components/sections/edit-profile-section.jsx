@@ -78,8 +78,8 @@ export default React.createClass({
     let errors = ((this.props.errors || {}).updateUser || {}).errors || {};
 
     let schema = this.getSchema();
-
-    return _.reduce(schema.properties, function(m, v, k) {
+    let autoFocus = true;
+    let fields = _.reduce(schema.properties, function(m, v, k) {
       let label = v.title;
       let isRequired = _.include(schema.required, k);
       if (isRequired) { label += ' *'; }
@@ -89,7 +89,8 @@ export default React.createClass({
       let f = {
         label,
         help,
-        hasError: !!errors[k]
+        hasError: !!errors[k],
+        autoFocus: !!autoFocus
       };
 
       if (v.type === 'string') {
@@ -98,8 +99,12 @@ export default React.createClass({
 
       m[k] = f;
 
+      autoFocus = false
+
       return m;
     }, {});
+
+    return fields;
   },
 
   handleLogOut(e) {
