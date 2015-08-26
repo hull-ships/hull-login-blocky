@@ -27,7 +27,7 @@ export function logIn(data) {
       ...wrap(data)
     }).end((error, response) => {
       if (response.status === 404) {
-        resolve()
+        resolve();
       } else {
         reject(new Error('invalid credentials'));
       }
