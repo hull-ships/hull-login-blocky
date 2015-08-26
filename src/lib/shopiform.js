@@ -26,9 +26,8 @@ export function logIn(data) {
       'return_to': INEXISTANT_URL,
       ...wrap(data)
     }).end((error, response) => {
-      // When log in succeeds, the user is redirected to `return_to` value.
-      if (o + INEXISTANT_URL === response.xhr.responseURL) {
-        resolve();
+      if (response.status === 404) {
+        resolve()
       } else {
         reject(new Error('invalid credentials'));
       }
