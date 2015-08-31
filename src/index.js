@@ -10,4 +10,3 @@ function onReady(hull, user, platform, organization) {
 }
 
 Hull.ready(onReady);
-

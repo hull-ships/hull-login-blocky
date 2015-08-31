@@ -1,20 +1,17 @@
-'use strict';
-
 import React from 'react';
 import t from 'tcomb-form';
-import { translate } from '../../lib/i18n';
-import { Login, Password } from '../../lib/types';
+import { translate } from '../lib/i18n';
 import { getStyles } from './styles';
-import AsyncActionsMixin from '../../mixins/async-actions';
-import renderSectionContent from './render-section-content';
-import { TranslatedMessage } from '../i18n';
-import SocialLoginErrors from '../social-login-errors';
+import { FieldTypes, Mixins } from '../lib';
+import { OrganizationImage, TranslatedMessage, SocialLoginErrors, SectionContent } from '../components';
+
+let { Login, Password } = FieldTypes;
 
 export default React.createClass({
   displayName: 'LogInSection',
 
   mixins: [
-    AsyncActionsMixin
+    Mixins.AsyncActions
   ],
 
   getInitialState() {
@@ -45,7 +42,7 @@ export default React.createClass({
         type: 'text',
         help: <TranslatedMessage message='log-in email help text' />,
         hasError,
-        error: hasError && <TranslatedMessage message='log-in invalid credentials error' />,
+        error: hasError && translate('log-in invalid credentials error'),
         autoFocus: true
       },
       password: {
@@ -80,7 +77,9 @@ export default React.createClass({
       m = translate('log-in button text');
       d = false;
     }
-    let content = renderSectionContent(this.props, {
+
+
+    let formProps = {
       kind: 'compact',
       type: this.getType(),
       fields: this.getFields(),
@@ -89,20 +88,46 @@ export default React.createClass({
       onChange: this.handleChange,
       disabled: d,
       value: { login: this.props.currentEmail }
-    });
+    };
+
 
     const styles = getStyles();
 
+    let signupLink;
+    if (this.props.shipSettings.show_signup) {
+      signupLink = <p style={styles.sectionText}>
+        <TranslatedMessage tag='a'
+          href='#'
+          onClick={this.props.activateSignUpSection}
+          message="log-in switch to sign-up link" />
+      </p>;
+    }
+
     return (
       <div>
+        <div style={styles.sectionHeader}>
+          <OrganizationImage style={styles.sectionOrganizationImage} src={this.props.shipSettings.logo_image} />
+          <TranslatedMessage tag='h1'
+            style={styles.sectionTitle}
+            message='log-in header'
+            variables={{ organization: this.props.organization.name }} />
+          {signupLink}
+        </div>
+
         <SocialLoginErrors {...this.props} />
-        {content}
-        <div style={styles.stickySectionFooter}>
+
+        <SectionContent {...this.props} formProps={formProps} />
+
+        <div style={styles.sectionFooter}>
           <p style={styles.sectionText}>
-            <TranslatedMessage tag='a' href='javascript: void 0;' onClick={this.props.activateResetPasswordSection} message='log-in forgot password link' />
+            <TranslatedMessage tag='a'
+              href='javascript: void 0;'
+              onClick={this.props.activateResetPasswordSection}
+              message='log-in forgot password link' />
           </p>
         </div>
       </div>
     );
   }
 });
+

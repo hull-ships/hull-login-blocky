@@ -7,7 +7,6 @@ import { Email, Password } from '../../lib/types';
 import { getStyles } from './styles';
 import AsyncActionsMixin from '../../mixins/async-actions';
 import renderSectionContent from './render-section-content';
-import SocialLoginErrors from '../social-login-errors';
 import { TranslatedMessage } from '../i18n';
 
 export default React.createClass({

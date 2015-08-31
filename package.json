@@ -1,6 +1,6 @@
 {
-  "name": "hull-login",
-  "description": "A Login Ship",
+  "name": "hull-login-blocky",
+  "description": "A Login Ship (blocky)",
   "version": "0.0.1",
   "homepage": "https://github.com/hull-ships/hull-login",
   "license": "MIT",
@@ -28,17 +28,13 @@
     "react"
   ],
   "dependencies": {
-    "bounce.js": "citelao/bounce.js#master",
+    "react": ">=0.12.2",
+    "underscore": "^1.8.2",
+    "hull-login" : "0.1.4",
     "babel-runtime": "^5.8.20",
-    "color": "0.10.1",
-    "json-svg-icons": "hull/json-svg-icons#master",
-    "messageformat": "0.2.2",
     "object-assign": "2.0.0",
     "radium": "0.10.1",
-    "react": "0.13.3",
-    "tcomb-form": "0.4.11",
-    "tcomb-json-schema": "oliger/tcomb-json-schema#master",
-    "underscore": "^1.8.2"
+    "color": "0.10.1"
   },
   "devDependencies": {
     "babel": "^5.6.7",

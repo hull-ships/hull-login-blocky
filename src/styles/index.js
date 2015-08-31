@@ -16,7 +16,8 @@ function getStyles() {
 
     lineHeight: settings.defaultLineHeight,
 
-    color: settings.textColor
+    // color: settings.textColor
+    color: 'red'
   };
 
   const reset = {
@@ -110,7 +111,7 @@ function getStyles() {
     color: settings.whiteColor
   };
 
-  return {
+  let ret = {
     base,
     reset,
     link,
@@ -119,6 +120,8 @@ function getStyles() {
     placeholder,
     overlayLeft
   };
+    console.warn('Here are some Syels: ', ret);
+  return ret;
 }
 
 export default {

@@ -46,8 +46,12 @@ export default React.createClass({
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown, true);
     mediaQuery.addListener(this.handleMediaQueryChange);
-
-    React.findDOMNode(this.refs.overlay).focus();
+    let node = React.findDOMNode(this.refs.overlay);
+    if (!node) {
+      debugger;
+    } else {
+      node.focus();
+    }
   },
 
   componentWillUnmount() {
@@ -56,7 +60,13 @@ export default React.createClass({
   },
 
   componentDidUpdate() {
-    React.findDOMNode(this.refs.overlay).focus();
+    // React.findDOMNode(this.refs.overlay).focus();
+    let node = React.findDOMNode(this.refs.overlay);
+    if (!node) {
+      debugger;
+    } else {
+      node.focus();
+    }
   },
 
   componentWillEnter(done) {
