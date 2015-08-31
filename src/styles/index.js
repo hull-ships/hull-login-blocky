@@ -16,8 +16,7 @@ function getStyles() {
 
     lineHeight: settings.defaultLineHeight,
 
-    // color: settings.textColor
-    color: 'red'
+    color: settings.textColor
   };
 
   const reset = {
