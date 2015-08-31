@@ -111,7 +111,7 @@ function getStyles() {
     color: settings.whiteColor
   };
 
-  let ret = {
+  return {
     base,
     reset,
     link,
@@ -120,8 +120,6 @@ function getStyles() {
     placeholder,
     overlayLeft
   };
-    console.warn('Here are some Syels: ', ret);
-  return ret;
 }
 
 export default {

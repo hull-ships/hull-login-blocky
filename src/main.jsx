@@ -5,10 +5,11 @@ import ReactTransitionGroup from 'react/lib/ReactTransitionGroup';
 import { Core, Components } from 'hull-login';
 import Sections from './sections';
 import Overlay from './components/overlay';
+import Styles from './components/styles';
 import { getSettings } from './styles/settings';
 
 let { Mixins, I18n, Utils } = Core;
-let { Styles, TranslatedMessage } = Components;
+let { TranslatedMessage } = Components;
 
 const name = {
   logIn: 'log-in',

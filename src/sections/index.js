@@ -1,4 +1,4 @@
-import { Sections, Components } from 'hull-login';
+import { Sections } from 'hull-login';
 
 const sectionFooter = {
   position: 'absolute',
