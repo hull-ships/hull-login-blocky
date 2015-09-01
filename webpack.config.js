@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var _ = require('underscore');
 var path = require('path');
 var webpack = require('webpack');
