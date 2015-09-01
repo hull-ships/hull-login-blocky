@@ -78,9 +78,8 @@ var modulesDirectories = ["node_modules", "bower_components", "bower_components/
 // Among which: vex, datepicker, underscore-contrib
 var loaders = [
   {test: /\.json$/,                loaders: ["json-loader"] },
-  {test: /\.js$/,                  loaders: ["babel-loader?optional[]=runtime"] },
-  {test: /\.jsx$/,                 loaders: ["react-hot", "babel-loader?optional[]=runtime"] },
-  //{test: /\.(css|scss)$/,          loaders: ["style/useable", "css-loader", "autoprefixer-loader?browsers=last 2 version", "sass-loader?outputStyle=expanded&"+cssIncludes]},
+  {test: /\.js$/,                  loaders: ["babel-loader?optional[]=runtime"], exclude: /node_modules\/[^hull]/ },
+  {test: /\.jsx$/,                 loaders: ["react-hot", "babel-loader?optional[]=runtime"], exclude: /node_modules\/[^hull]/ },
   {test: /\.jpe?g$|\.gif$|\.png$/, loaders: ["file"]},
   {test: /\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file" },
 ];
