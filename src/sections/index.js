@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sections, Components } from 'hull-login';
+import Centerer from '../components/centerer';
 
 let { TranslatedMessage } = Components;
 
@@ -12,6 +13,19 @@ const sectionFooter = {
   padding: 30
 };
 
+function renderSection() {
+  const styles = this.getStyles();
+
+  return (
+    <div>
+      {this.renderHeader(styles)}
+      <Centerer style={{ padding: '30px 60px' }}>
+        {this.renderContent(styles)}
+      </Centerer>
+      {this.renderFooter(styles)}
+    </div>
+  );
+}
 
 class logIn extends Sections.logIn {
   renderHeader() {}
@@ -20,6 +34,9 @@ class logIn extends Sections.logIn {
       ...super.getStyles(),
       sectionFooter
     };
+  }
+  render() {
+    return renderSection.call(this);
   }
 }
 
@@ -31,6 +48,9 @@ class signUp extends Sections.signUp {
       ...super.getStyles(),
       sectionFooter
     };
+  }
+  render() {
+    return renderSection.call(this);
   }
 }
 
@@ -47,6 +67,9 @@ class resetPassword extends Sections.resetPassword {
       </p>
     </div>;
   }
+  render() {
+    return renderSection.call(this);
+  }
 }
 
 
@@ -61,6 +84,9 @@ class showProfile extends Sections.showProfile {
           message='view profile switch to edit profile link' />
       </p>
     </div>;
+  }
+  render() {
+    return renderSection.call(this);
   }
 }
 
@@ -85,14 +111,18 @@ class editProfile extends Sections.editProfile {
       </p>
     </div>;
   }
-
+  render() {
+    return renderSection.call(this);
+  }
 }
 
 
 class thanks extends Sections.thanks {
   renderHeader() {}
+  render() {
+    return renderSection.call(this);
+  }
 }
-
 
 export default {
   logIn,
@@ -102,4 +132,3 @@ export default {
   editProfile,
   thanks
 };
-

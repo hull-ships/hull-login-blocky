@@ -1,5 +1,4 @@
 import React from 'react';
-import assign from 'object-assign';
 import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 import { getSettings } from '../../styles/settings';
 import Nav from '../nav';
@@ -160,51 +159,6 @@ export default React.createClass({
       overflowY: 'auto'
     };
 
-    let overlay = {
-      backgroundColor: settings.whiteColor,
-      zIndex: 20001,
-      outline: 'none',
-      position: 'relative',
-      WebkitTransition: 'opacity 300ms ease-out',
-      msTransition: 'opacity 300ms ease-out',
-      MozTransition: 'opacity 300ms ease-out',
-      transition: 'opacity 300ms ease-out',
-      minHeight: 600,
-      overflow: 'scroll',
-      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-      maxWidth: 900,
-      width: '100%',
-      display: 'table',
-      margin: '0 auto',
-      top: '50%',
-      MozTransform: 'translateY(-50%)',
-      MsTransform: 'translateY(-50%)',
-      Webkittransform: 'translateY(-50%)',
-      transform: 'translateY(-50%)'
-    };
-
-    let overlayDescription = {
-      position: 'relative',
-      width: '100%',
-      padding: '0 60px',
-      verticalAlign: 'middle',
-      textAlign: 'center'
-    };
-
-    if (this.props.image && this.props.image.match(/^http/)) {
-      assign(overlayDescription, {
-        backgroundImage: 'url(' + this.props.image + ')',
-        backgroundPosition: 'center top',
-        backgroundSize: 'cover'
-      });
-    }
-
-    let overlayContent = {
-      position: 'relative',
-      verticalAlign: 'middle',
-      padding: '30px 60px'
-    };
-
     let overlayCloseButton = {
       position: 'absolute',
       textAlign: 'left',
@@ -228,33 +182,67 @@ export default React.createClass({
       ]
     };
 
-    assign(overlayDescription, {
-      width: 450,
-      minWidth: 450,
-      maxWidth: 450,
-      display: 'table-cell'
-    });
-
-    assign(overlayContent, {
-      width: 450,
-      minWidth: 450,
-      maxWidth: 450,
-      display: 'table-cell'
-    });
-
     let overlayParagraph = {
       color: '#fff',
       textAlign: 'center'
     };
 
+    let overlay = {
+      zIndex: 20001,
+      outline: 'none',
+      position: 'relative',
+      display: 'block',
+      overflow: 'hidden',
+      margin: '0 auto',
+      width: 900,
+      backgroundColor: settings.whiteColor,
+      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+      WebkitTransition: 'opacity 300ms ease-out',
+      msTransition: 'opacity 300ms ease-out',
+      MozTransition: 'opacity 300ms ease-out',
+      transition: 'opacity 300ms ease-out'
+
+      // top: '50%',
+      // MozTransform: 'translateY(-50%)',
+      // MsTransform: 'translateY(-50%)',
+      // Webkittransform: 'translateY(-50%)',
+      // transform: 'translateY(-50%)'
+    };
+
+    let overlaySection = {
+      width: '50%',
+      minHeight: 600,
+      'float': 'left',
+      display: 'block',
+      overflow: 'hidden',
+      position: 'relative'
+    };
+
+    let overlayImageSection = {
+      ...overlaySection
+    };
+
+    if (this.props.image && this.props.image.match(/^http/)) {
+      overlayImageSection = {
+        ...overlayImageSection,
+        backgroundImage: 'url(' + this.props.image + ')',
+        backgroundPosition: 'center top',
+        backgroundSize: 'cover'
+      };
+    }
+
+    let overlayFormSection = {
+      ...overlaySection
+    };
+
     return {
       overlayContainer,
       overlayBackground,
-      overlay,
       overlayCloseButton,
-      overlayDescription,
-      overlayContent,
-      overlayParagraph
+      overlayParagraph,
+      overlay,
+      overlayFormSection,
+      overlayImageSection
     };
   },
 
@@ -262,28 +250,22 @@ export default React.createClass({
     let styles = this.getStyles();
     let className = this.props.className + ' hull-login__modal';
 
-    let left = null;
-    let right = null;
-    if (React.Children.count(this.props.children) === 2) {
-      left = this.props.children[0];
-      right = this.props.children[1];
-    } else {
+    if (React.Children.count(this.props.children) < 2) {
       throw new Error('Overlay expects two children.');
     }
+    let left = this.props.children[0];
+    let right = this.props.children[1];
 
     return (
       <div className={className} style={styles.overlayContainer}>
-        <div
-          className='hull-login__modal__dialog'
+        <div className='hull-login__modal__dialog'
           aria-hidden={!this.props.visible}
           aria-label={this.props.title}
           role='dialog'
           style={styles.overlay}
           tabIndex={0}
           ref='overlay'>
-
-          <div className='hull-login__modal__description'
-            style={styles.overlayDescription}>
+          <div className='hull-login__modal__description' style={styles.overlayImageSection}>
             <a className='hull-login__modal_close-button'
               {...this.getBrowserStateEvents()}
               style={this.buildStyles(styles.overlayCloseButton)}
@@ -291,13 +273,11 @@ export default React.createClass({
               aria-label='Close'
               title='Close this dialog'
               onClick={this.handleClose}>×</a>
-
-            {left}
+              {left}
           </div>
-          <div className='hull-login__modal__content'
-            style={styles.overlayContent}>
-            <Nav items={this.props.nav} />
 
+          <div className='hull-login__modal__content' style={styles.overlayFormSection}>
+            <Nav items={this.props.nav} />
             {right}
           </div>
         </div>

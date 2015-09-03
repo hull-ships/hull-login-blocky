@@ -6,6 +6,7 @@ import { Core, Components } from 'hull-login';
 import Sections from './sections';
 import Overlay from './components/overlay';
 import Styles from './components/styles';
+import Centerer from './components/centerer';
 import { getSettings } from './styles/settings';
 
 let { Mixins, I18n, Utils } = Core;
@@ -28,7 +29,6 @@ const SectionsPhotos = {
   editProfile: 'edit_profile_image',
   thanks: 'thanks_image'
 };
-
 
 export default React.createClass({
   displayName: 'HullLoginShip',
@@ -161,10 +161,10 @@ export default React.createClass({
       message={name[this.state.activeSection] + ' description'} />;
 
     return (
-      <div style={{ textAlign: 'center' }}>
+      <Centerer style={{ textAlign: 'center', padding: '0 60px' }}>
         {title}
         {description}
-      </div>
+      </Centerer>
     );
   },
 
