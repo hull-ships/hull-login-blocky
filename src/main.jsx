@@ -6,7 +6,6 @@ import { Core, Components } from 'hull-login';
 import Sections from './sections';
 import Overlay from './components/overlay';
 import Styles from './components/styles';
-import Centerer from './components/centerer';
 import { getSettings } from './styles/settings';
 
 let { Mixins, I18n, Utils } = Core;
@@ -161,10 +160,10 @@ export default React.createClass({
       message={name[this.state.activeSection] + ' description'} />;
 
     return (
-      <Centerer style={{ textAlign: 'center', padding: '0 60px' }}>
+      <div>
         {title}
         {description}
-      </Centerer>
+      </div>
     );
   },
 

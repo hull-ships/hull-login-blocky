@@ -3,10 +3,10 @@ import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 import { getSettings } from '../../styles/settings';
 import Nav from '../nav';
 
-let mediaQuery = window.matchMedia('(min-width: 460px)');
+let mediaQuery = window.matchMedia && window.matchMedia('(min-width: 900px)');
 
 function getViewport() {
-  return mediaQuery.matches ? 'normal' : 'compact';
+  return (mediaQuery == null || mediaQuery.matches) ? 'normal' : 'compact';
 }
 
 const FOCUSABLE_ELEMENTS_SELECTOR = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex]:not([tabindex="-1"]), *[contenteditable]';
@@ -42,18 +42,22 @@ export default React.createClass({
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown, true);
-    mediaQuery.addListener(this.handleMediaQueryChange);
+    if (mediaQuery != null) {
+      mediaQuery.addListener(this.handleMediaQueryChange);
+    }
 
-    React.findDOMNode(this.refs.overlay).focus();
+    React.findDOMNode(this.refs.modal).focus();
   },
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeydown, true);
-    mediaQuery.removeListener(this.handleMediaQueryChange);
+    if (mediaQuery != null) {
+      mediaQuery.removeListener(this.handleMediaQueryChange);
+    }
   },
 
   componentDidUpdate() {
-    React.findDOMNode(this.refs.overlay).focus();
+    React.findDOMNode(this.refs.modal).focus();
   },
 
   componentWillEnter(done) {
@@ -64,7 +68,7 @@ export default React.createClass({
     /*eslint-enable */
     b.style.opacity = '1';
 
-    let overlay = React.findDOMNode(this.refs.overlay);
+    let overlay = React.findDOMNode(this.refs.modal);
     overlay.style.opacity = '1';
 
     done();
@@ -78,7 +82,7 @@ export default React.createClass({
     /*eslint-enable */
     b.style.opacity = '0';
 
-    let overlay = React.findDOMNode(this.refs.overlay);
+    let overlay = React.findDOMNode(this.refs.modal);
     overlay.style.opacity = '0';
 
     setTimeout(done, 300);
@@ -99,7 +103,7 @@ export default React.createClass({
 
     if (e.key === 'Tab' || e.keyCode === 9) {
       let focussed = e.target;
-      let focusableElements = React.findDOMNode(this.refs.overlay).querySelectorAll(FOCUSABLE_ELEMENTS_SELECTOR);
+      let focusableElements = React.findDOMNode(this.refs.modal).querySelectorAll(FOCUSABLE_ELEMENTS_SELECTOR);
 
       let focussedIndex = -1;
       for (let i = 0, l = focusableElements.length; i < l; i++) {
@@ -124,7 +128,7 @@ export default React.createClass({
   },
 
   getStyles() {
-    const settings = getSettings();
+    let settings = getSettings();
 
     let overlayContainer = {
       position: 'fixed',
@@ -139,7 +143,7 @@ export default React.createClass({
     };
 
     let overlayBackground = {
-      position: 'fixed',
+      position: 'absolute',
       left: 0,
       top: 0,
       width: '100%',
@@ -154,12 +158,27 @@ export default React.createClass({
       WebkitUserSelect: 'none',
       MozUserSelect: 'none',
       MsUserSelect: 'none',
-      userSelect: 'none',
-      overflowX: 'hidden',
-      overflowY: 'auto'
+      userSelect: 'none'
     };
 
-    let overlayCloseButton = {
+    let modal = {
+      maxWidth: 900,
+      background: settings.whiteColor,
+      zIndex: 20001,
+      outline: 'none',
+      position: 'relative',
+      display: 'block',
+      overflow: 'hidden',
+      margin: '0 auto',
+      backgroundColor: settings.whiteColor,
+      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+      WebkitTransition: 'opacity 300ms ease-out',
+      msTransition: 'opacity 300ms ease-out',
+      MozTransition: 'opacity 300ms ease-out',
+      transition: 'opacity 300ms ease-out'
+    };
+
+    let modalCloseButton = {
       position: 'absolute',
       textAlign: 'left',
       verticalAlign: 'top',
@@ -182,106 +201,106 @@ export default React.createClass({
       ]
     };
 
-    let overlayParagraph = {
-      color: '#fff',
-      textAlign: 'center'
-    };
-
-    let overlay = {
-      zIndex: 20001,
-      outline: 'none',
-      position: 'relative',
-      display: 'block',
-      overflow: 'hidden',
-      margin: '0 auto',
-      width: 900,
-      backgroundColor: settings.whiteColor,
-      boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
-      WebkitTransition: 'opacity 300ms ease-out',
-      msTransition: 'opacity 300ms ease-out',
-      MozTransition: 'opacity 300ms ease-out',
-      transition: 'opacity 300ms ease-out'
-
-      // top: '50%',
-      // MozTransform: 'translateY(-50%)',
-      // MsTransform: 'translateY(-50%)',
-      // Webkittransform: 'translateY(-50%)',
-      // transform: 'translateY(-50%)'
-    };
-
-    let overlaySection = {
-      width: '50%',
-      minHeight: 600,
-      'float': 'left',
-      display: 'block',
-      overflow: 'hidden',
+    let modalPane = {
+      verticalAlign: 'middle',
       position: 'relative'
     };
 
-    let overlayImageSection = {
-      ...overlaySection
+    let modalImagePane = {
+      ...modalPane,
+      textAlign: 'center',
+      padding: '30px 60px'
     };
 
     if (this.props.image && this.props.image.match(/^http/)) {
-      overlayImageSection = {
-        ...overlayImageSection,
+      modalImagePane = {
+        ...modalImagePane,
         backgroundImage: 'url(' + this.props.image + ')',
         backgroundPosition: 'center top',
         backgroundSize: 'cover'
       };
     }
 
-    let overlayFormSection = {
-      ...overlaySection
+    let modalFormPane = {
+      ...modalPane,
+      background: settings.whiteColor,
+      padding: '80px 60px'
     };
+
+    if (this.state.viewport === 'normal') {
+      overlayBackground = {
+        ...overlayBackground,
+        position: 'fixed',
+        overflowX: 'hidden',
+        overflowY: 'auto'
+      };
+
+      modal = {
+        ...modal,
+        display: 'table',
+        boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
+        width: 900,
+        margin: '60px auto'
+      };
+
+      let modalPaneWide = {
+        display: 'table-cell',
+        width: '50%'
+      };
+
+      modalImagePane = {
+        ...modalImagePane,
+        ...modalPaneWide,
+        height: 600
+      };
+
+      modalFormPane = {
+        ...modalFormPane,
+        ...modalPaneWide
+      };
+    }
 
     return {
       overlayContainer,
       overlayBackground,
-      overlayCloseButton,
-      overlayParagraph,
-      overlay,
-      overlayFormSection,
-      overlayImageSection
+      modal,
+      modalCloseButton,
+      modalImagePane,
+      modalFormPane
     };
   },
 
   render() {
-    let styles = this.getStyles();
-    let className = this.props.className + ' hull-login__modal';
+    if (React.Children.count(this.props.children) < 2) { throw new Error('Overlay expects two children.'); }
 
-    if (React.Children.count(this.props.children) < 2) {
-      throw new Error('Overlay expects two children.');
-    }
-    let left = this.props.children[0];
-    let right = this.props.children[1];
+    let styles = this.getStyles();
+    let className = this.props.className + ' hull-login__overlay-container';
 
     return (
       <div className={className} style={styles.overlayContainer}>
-        <div className='hull-login__modal__dialog'
+        <div className='hull-login__modal'
           aria-hidden={!this.props.visible}
           aria-label={this.props.title}
           role='dialog'
-          style={styles.overlay}
+          style={styles.modal}
           tabIndex={0}
-          ref='overlay'>
-          <div className='hull-login__modal__description' style={styles.overlayImageSection}>
+          ref='modal'>
+          <div className='hull-login__modal__image-pane' style={styles.modalImagePane}>
             <a className='hull-login__modal_close-button'
               {...this.getBrowserStateEvents()}
-              style={this.buildStyles(styles.overlayCloseButton)}
+              style={this.buildStyles(styles.modalCloseButton)}
               href='javascript: void 0;'
               aria-label='Close'
               title='Close this dialog'
               onClick={this.handleClose}>×</a>
-              {left}
+            {this.props.children[0]}
           </div>
-
-          <div className='hull-login__modal__content' style={styles.overlayFormSection}>
+          <div className='hull-login__modal__form-pane' style={styles.modalFormPane}>
             <Nav items={this.props.nav} />
-            {right}
+            {this.props.children[1]}
           </div>
         </div>
-        <div ref='background' className='hull-login__modal__overlay' style={styles.overlayBackground} onClick={this.handleClose} />
+        <div ref='background' className='hull-login__modal__overlay-background' style={styles.overlayBackground} onClick={this.handleClose} />
       </div>
     );
   }

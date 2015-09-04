@@ -19,7 +19,8 @@ export default React.createClass({
     const styles = getStyles();
 
     let rules = [
-      { 'hull-login__modal__dialog': styles.base },
+      { '.hull-login__modal': styles.base },
+
       { 'a': styles.link },
       { 'a:active': styles.link },
       { 'a:link': styles.link },
