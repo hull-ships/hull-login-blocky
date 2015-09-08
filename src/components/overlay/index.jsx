@@ -238,6 +238,7 @@ export default React.createClass({
       modal = {
         ...modal,
         display: 'table',
+        tableLayout: 'fixed',
         boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.05)',
         width: 900,
         margin: '60px auto'
@@ -245,8 +246,7 @@ export default React.createClass({
 
       let modalPaneWide = {
         display: 'table-cell',
-        maxWidth: 450,
-        width: 450
+        width: '50%'
       };
 
       modalImagePane = {
