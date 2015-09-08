@@ -160,7 +160,7 @@ export default React.createClass({
       message={name[this.state.activeSection] + ' description'} />;
 
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         {title}
         {description}
       </div>
