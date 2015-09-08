@@ -245,7 +245,8 @@ export default React.createClass({
 
       let modalPaneWide = {
         display: 'table-cell',
-        width: '50%'
+        maxWidth: 450,
+        width: 450
       };
 
       modalImagePane = {
