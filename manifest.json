@@ -106,20 +106,6 @@
       "default": true
     },
     {
-      "name": "split_name_field",
-      "title": "Split name in two fields",
-      "description": "Split the name field in two fields (first name & last name).",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "name": "show_name_field_on_sign_up",
-      "title": "Show name field on sign up",
-      "description": "If checked, show a field that ask the user for his name.",
-      "type": "boolean",
-      "default": true
-    },
-    {
       "name":"show_classic_login_as_button",
       "title": "Show email registration as button",
       "description": "Make email registration appear as a button just like social login. Clicking this button will expand the traditional sign-up form.",
