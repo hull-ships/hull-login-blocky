@@ -29,7 +29,7 @@
   "dependencies": {
     "react": ">=0.12.2",
     "underscore": "^1.8.2",
-    "hull-login" : "hull-ships/hull-login#develop",
+    "hull-login" : "hull-ships/hull-login#6018ed5be238ce1c8c55188b7d2c8e6d580e8a97",
     "babel-runtime": "5.8.20",
     "object-assign": "2.0.0",
     "radium": "0.10.1",
