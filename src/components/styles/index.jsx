@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Style } from 'radium';
 import { getStyles } from '../../styles';
 
@@ -8,7 +8,8 @@ export default React.createClass({
   displayName: 'Styles',
 
   propTypes: {
-    scope: React.PropTypes.string.isRequired
+    scope: PropTypes.string.isRequired,
+    reset: PropTypes.object
   },
 
   getSelector() {
@@ -18,10 +19,9 @@ export default React.createClass({
   getRules() {
     const styles = getStyles();
 
-    let rules = [
+    const rules = [
       { '.hull-login__modal': styles.base },
-
-      { 'a': styles.link },
+      { a: styles.link },
       { 'a:active': styles.link },
       { 'a:link': styles.link },
       { 'a:visited': styles.link },

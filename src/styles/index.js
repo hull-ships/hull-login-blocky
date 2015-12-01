@@ -1,5 +1,3 @@
-'use strict';
-
 import color from 'color';
 import { getSettings } from './settings';
 
@@ -13,9 +11,7 @@ function getStyles() {
     fontStyle: 'normal',
     fontVariant: 'normal',
     fontWeight: 'normal',
-
     lineHeight: settings.defaultLineHeight,
-
     color: settings.textColor
   };
 
@@ -43,7 +39,7 @@ function getStyles() {
     zIndex: 'auto',
 
     clear: 'none',
-    'float': 'none',
+    float: 'none',
     overflow: 'visible',
 
     opacity: 1,
@@ -103,7 +99,7 @@ function getStyles() {
   };
 
   const placeholder = {
-    color: `#bbbbbb !important`
+    color: '#bbbbbb !important'
   };
 
   const overlayLeft = {

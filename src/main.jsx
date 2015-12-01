@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import assign from 'object-assign';
-import { map, reduce } from 'underscore';
+import { map, reduce } from 'lodash';
 import ReactTransitionGroup from 'react/lib/ReactTransitionGroup';
 import { Core, Components } from 'hull-login';
 import Sections from './sections';
@@ -8,8 +8,8 @@ import Overlay from './components/overlay';
 import Styles from './components/styles';
 import { getSettings } from './styles/settings';
 
-let { Mixins, I18n, Utils } = Core;
-let { TranslatedMessage } = Components;
+const { Mixins, I18n, Utils } = Core;
+const { TranslatedMessage } = Components;
 
 const name = {
   logIn: 'log-in',
@@ -30,7 +30,13 @@ const SectionsPhotos = {
 };
 
 export default React.createClass({
+
   displayName: 'HullLoginShip',
+
+  propTypes: {
+    engine: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
+  },
 
   mixins: [
     Mixins.LayeredComponent
@@ -49,9 +55,17 @@ export default React.createClass({
     this.props.engine.removeChangeListener(this._onChange);
   },
 
+  getResetStyles() {
+    return this.state.shipSettings && this.state.shipSettings.reset_styles;
+  },
+
+  getScope() {
+    return `ship-${this.state.ship.id}`;
+  },
+
   preloadImages() {
     map(SectionsPhotos, (i)=> {
-      let imageUrl = this.state.shipSettings[i];
+      const imageUrl = this.state.shipSettings[i];
       if (imageUrl) {
         Utils.preloadImage(imageUrl);
       }
@@ -62,13 +76,6 @@ export default React.createClass({
     this.setState(this.props.engine.getState());
   },
 
-  getScope() {
-    return `ship-${this.state.ship.id}`;
-  },
-
-  getResetStyles() {
-    return this.state.shipSettings && this.state.shipSettings.reset_styles;
-  },
 
   renderOverlay() {
     if (!this.state.dialogIsVisible) { return null; }
@@ -106,17 +113,19 @@ export default React.createClass({
     const nav = navs[this.state.activeSection];
 
     const photos = reduce(SectionsPhotos, (ps, v, k)=> {
-      let img = this.state.shipSettings[v];
+      const img = this.state.shipSettings[v];
       if (img) ps[k] = img;
       return ps;
     }, {});
+
+    const visible = true;
 
     return (
       <Overlay className={this.getScope()}
         onClose={this.props.actions.hideDialog}
         title={overlayTitle}
         nav={nav}
-        visible={true}
+        visible={visible}
         image={photos[this.state.activeSection]}>
         {this.renderLeftContent()}
         <Section {...this.state} {...this.props.actions} />
@@ -125,16 +134,16 @@ export default React.createClass({
   },
 
   renderLeftContent() {
-    let settings = getSettings();
+    const settings = getSettings();
 
     const d = { organization: this.state.organization.name };
 
-    let descriptionStyle = {
+    const descriptionStyle = {
       textAlign: 'center',
       color: this.state.shipSettings.light_text_color
     };
 
-    let titleStyle = {
+    const titleStyle = {
       ...descriptionStyle,
       fontFamily: settings.secondaryFontFamily,
       fontSize: 36,
@@ -147,17 +156,21 @@ export default React.createClass({
     if (this.state.shipSettings.logo_image && (this.state.activeSection === 'logIn' || this.state.activeSection === 'signUp')) {
       title = <img style={{ maxWidth: '80%', marginBottom: 10 }} src={this.state.shipSettings.logo_image} />;
     } else {
-      title = <TranslatedMessage tag='h1'
-        className='hull-login__modal__description__title'
-        style={titleStyle}
-        message={name[this.state.activeSection] + ' photo header'}
-        variables={d} />;
+      title = (
+        <TranslatedMessage tag="h1"
+          className="hull-login__modal__description__title"
+          style={titleStyle}
+          message={`${name[this.state.activeSection]} photo header`}
+          variables={d} />
+      );
     }
 
-    let description = <TranslatedMessage tag='p'
-      className='hull-login__modal__description__paragraph'
-      style={descriptionStyle}
-      message={name[this.state.activeSection] + ' description'} />;
+    const description = (
+      <TranslatedMessage tag="p"
+        className="hull-login__modal__description__paragraph"
+        style={descriptionStyle}
+        message={`${name[this.state.activeSection]} description`} />
+    );
 
     return (
       <div style={{ textAlign: 'center' }}>
@@ -176,72 +189,76 @@ export default React.createClass({
   render() {
     const u = this.state.user;
 
-    let buttons = [];
+    const buttons = [];
     if (u) {
       if (this.state.shipSettings.show_profile) {
         if (this.state.hasForm && !this.state.formIsSubmitted) {
-          let b = <TranslatedMessage tag='a'
-            href='#'
-            key='complete-profile'
-            className='hull-login__button hull-login__button--edit-profile'
-            onClick={this.props.actions.activateEditProfileSection}
-            message='nav complete profile link' />;
-          buttons.push(b);
+          buttons.push(
+            <TranslatedMessage tag="a"
+              href="#"
+              key="complete-profile"
+              className="hull-login__button hull-login__button--edit-profile"
+              onClick={this.props.actions.activateEditProfileSection}
+              message="nav complete profile link" />
+          );
         } else {
-          let b = <a href='#'
-            key='show-profile'
-            className='hull-login__button hull-login__button--show-profile'
-            onClick={this.props.actions.activateShowProfileSection}>{u.name || u.username || u.email}</a>;
-          buttons.push(b);
+          buttons.push(
+            <a href="#"
+              key="show-profile"
+              className="hull-login__button hull-login__button--show-profile"
+              onClick={this.props.actions.activateShowProfileSection}>{u.name || u.username || u.email}</a>
+          );
         }
       }
 
       if (this.state.shipSettings.custom_buttons.length) {
         for (let i = 0; i < this.state.shipSettings.custom_buttons.length; i++) {
-          let { url, popup, text } = this.state.shipSettings.custom_buttons[i];
-          let b = <a href={url}
-            key={`custom-action-${i}`}
-            target={popup ? '_blank' : ''}
-            className='hull-login__button hull-login__button'>{text}</a>;
-          buttons.push(b);
+          const { url, popup, text } = this.state.shipSettings.custom_buttons[i];
+          buttons.push(
+            <a href={url}
+              key={`custom-action-${i}`}
+              target={popup ? '_blank' : ''}
+              className="hull-login__button hull-login__button">{text}</a>
+          );
         }
       }
 
       if (this.state.shipSettings.show_logout) {
-        let b = <TranslatedMessage tag='a'
-          href='#'
-          className='hull-login__button hull-login__button--log-out'
-          onClick={this.props.actions.logOut}
-          message='nav logout link' />;
-        buttons.push(b);
+        buttons.push(
+          <TranslatedMessage tag="a"
+            href="#"
+            className="hull-login__button hull-login__button--log-out"
+            onClick={this.props.actions.logOut}
+            message="nav logout link" />
+        );
       }
     } else {
       if (this.state.shipSettings.show_login) {
-        let b = <TranslatedMessage tag='a'
-          href='#'
-          key='log-in'
-          className='hull-login__button hull-login__button--log-in'
-          onClick={this.props.actions.activateLogInSection}
-          message='nav login link' />;
-        buttons.push(b);
+        buttons.push(
+          <TranslatedMessage tag="a"
+            href="#"
+            key="log-in"
+            className="hull-login__button hull-login__button--log-in"
+            onClick={this.props.actions.activateLogInSection}
+            message="nav login link" />
+        );
       }
 
       if (this.state.shipSettings.show_signup) {
-        let b = <TranslatedMessage tag='a'
-          href='#'
-          key='sign-up'
-          className='hull-login__button hull-login__button--sign-up'
-          onClick={this.props.actions.activateSignUpSection}
-          message='nav sign-up link' />;
-        buttons.push(b);
+        buttons.push(
+          <TranslatedMessage tag="a"
+            href="#"
+            key="sign-up"
+            className="hull-login__button hull-login__button--sign-up"
+            onClick={this.props.actions.activateSignUpSection}
+            message="nav sign-up link" />
+        );
       }
     }
 
-    let s = this.getScope();
-    let r = this.getResetStyles();
     return (
-      <div className='hull-login'>
-        <Styles scope={s} reset={r} />
+      <div className="hull-login">
+        <Styles scope={this.getScope()} reset={this.getResetStyles()} />
         {buttons}
       </div>
     );

@@ -1,8 +1,8 @@
 'use strict';
 
-import _ from 'underscore';
+import _ from 'lodash';
 
-let _settings = {
+const _settings = {
   primaryColor: '#fa5400',
 
   blackColor: '#222222',
@@ -38,9 +38,10 @@ let _settings = {
 
 function setSettings(settings) {
   _.each(settings, function(v, k) {
-    if (v != null) { _settings[k] = v; }
+    if (!!v) { _settings[k] = v; }
   });
 }
+
 
 function getSettings() {
   return _settings;

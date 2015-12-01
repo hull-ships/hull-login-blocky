@@ -8,17 +8,17 @@ export default React.createClass({
     items: React.PropTypes.arrayOf(React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,
       action: React.PropTypes.oneOfType([
-          React.PropTypes.func,
-          React.PropTypes.string
-        ]).isRequired,
+        React.PropTypes.func,
+        React.PropTypes.string
+      ]).isRequired,
       current: React.PropTypes.bool
     }))
   },
 
   getStyles() {
-    let settings = getSettings();
+    const settings = getSettings();
 
-    let items = this.props.items || [];
+    const items = this.props.items || [];
 
     const ul = {
       position: 'absolute',
@@ -31,11 +31,10 @@ export default React.createClass({
 
     const itemWidth = items.length ? (100 / items.length) : 100;
 
-
     const navItem = {
-      'display': 'block',
-      'float': 'left',
-      'width': '' + (itemWidth) + '%'
+      display: 'block',
+      float: 'left',
+      width: `${itemWidth}%`
     };
 
     const navItemActive = {
@@ -67,9 +66,9 @@ export default React.createClass({
   },
 
   render() {
-    let styles = this.getStyles();
+    const styles = this.getStyles();
 
-    let items = [];
+    const items = [];
 
     if (this.props.items && this.props.items.length) {
       this.props.items.forEach((value, k) => {
@@ -87,8 +86,8 @@ export default React.createClass({
         }
 
 
-        let key = `item-${k}`;
-        let item = (
+        const key = `item-${k}`;
+        const item = (
           <li key={key} style={(value.current) ? styles.navItemActive : styles.navItem}>
             <a href={href} style={styles.navItemTitle} onClick={handleClick}>{value.name}</a>
           </li>
@@ -102,8 +101,10 @@ export default React.createClass({
       return null;
     }
 
-    return <ul style={styles.ul}>
-      {items}
-    </ul>;
+    return (
+      <ul style={styles.ul}>
+        {items}
+      </ul>
+    );
   }
 });

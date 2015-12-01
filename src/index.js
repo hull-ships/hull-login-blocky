@@ -5,13 +5,11 @@ import Main from './main';
 
 
 function onReady(hull, user, platform, organization) {
-  let deployment = platform.deployments[0];
+  const deployment = platform.deployments[0];
   deployment.organization = organization;
 
-  let element = document.querySelector('#ship');
-
-
-  let engine = new Core.Engine(deployment);
+  const element = document.querySelector('#ship');
+  const engine = new Core.Engine(deployment);
 
   Core.I18n.setTranslations(deployment.ship.translations);
 
