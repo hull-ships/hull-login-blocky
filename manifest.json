@@ -85,7 +85,7 @@
       "format": "image"
     },
     {
-      "name":"thank_image",
+      "name":"thanks_image",
       "title": "Thanks image",
       "description": "Show this image on the background of the thanks for registration page",
       "type": "string",
