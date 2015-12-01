@@ -41,7 +41,7 @@ function onReady(hull, user, platform, organization) {
     signup_image: 'https://hull-alpha-organizations-store.s3.amazonaws.com/hull-store%2Fsuper%2F531853659e62dd46360015b0%2F53175bb2635c78c8790032cd%2F5118c23db29c8d2a0d000001%2F77dddc47-19ab-8919-ea74-c7837ce7d211.png',
     split_name_field: false,
     text_color: '#aaaaaa',
-    thank_image: 'https://hull-alpha-organizations-store.s3.amazonaws.com/hull-store%2Fsuper%2F531853659e62dd46360015b0%2F53175bb2635c78c8790032cd%2F5118c23db29c8d2a0d000001%2F1f28dee4-7775-bc4a-5ad8-581539ad5ad4.png',
+    thanks_image: 'https://hull-alpha-organizations-store.s3.amazonaws.com/hull-store%2Fsuper%2F531853659e62dd46360015b0%2F53175bb2635c78c8790032cd%2F5118c23db29c8d2a0d000001%2F1f28dee4-7775-bc4a-5ad8-581539ad5ad4.png',
     view_profile_image: 'https://hull-alpha-organizations-store.s3.amazonaws.com/hull-store%2Fsuper%2F531853659e62dd46360015b0%2F53175bb2635c78c8790032cd%2F5118c23db29c8d2a0d000001%2F1f28dee4-7775-bc4a-5ad8-581539ad5ad4.png'
   };
 
