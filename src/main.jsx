@@ -55,10 +55,6 @@ export default React.createClass({
     this.props.engine.removeChangeListener(this._onChange);
   },
 
-  getResetStyles() {
-    return this.state.shipSettings && this.state.shipSettings.reset_styles;
-  },
-
   getScope() {
     return `ship-${this.state.ship.id}`;
   },
@@ -258,7 +254,7 @@ export default React.createClass({
 
     return (
       <div className="hull-login">
-        <Styles scope={this.getScope()} reset={this.getResetStyles()} />
+        <Styles scope={this.getScope()} />
         {buttons}
       </div>
     );

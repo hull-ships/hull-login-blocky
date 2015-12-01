@@ -1,7 +1,3 @@
-'use strict';
-/* global require, console*/
-
-
 var gulp        = require('gulp');
 var runSequence = require('run-sequence');
 var config      = require('./config');
@@ -13,13 +9,7 @@ var config      = require('./config');
   'deploy',
   'format',
   'lint',
-  // 'ngrok',
-  'webpack',
-  // 'iconfont',
-  // 'iconsprite',
-  // 'sass',
-  // 'serve',
-  // 'sketch',
+  'webpack'
 ].map(function(task) { require('./gulp_tasks/' + task + '.js')(gulp, config);});
 
 

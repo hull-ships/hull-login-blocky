@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
+import ReactDOM from 'react-dom';
 import { getSettings } from '../../styles/settings';
 import Nav from '../nav';
 
@@ -18,7 +18,7 @@ export default React.createClass({
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     children: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired,
     nav: PropTypes.arrayOf(PropTypes.shape({
@@ -31,11 +31,6 @@ export default React.createClass({
     }))
   },
 
-  mixins: [
-    StyleResolverMixin,
-    BrowserStateMixin
-  ],
-
   getInitialState() {
     return { viewport: getViewport() };
   },
@@ -46,11 +41,11 @@ export default React.createClass({
       mediaQuery.addListener(this.handleMediaQueryChange);
     }
 
-    React.findDOMNode(this.refs.modal).focus();
+    ReactDOM.findDOMNode(this.refs.modal).focus();
   },
 
   componentDidUpdate() {
-    React.findDOMNode(this.refs.modal).focus();
+    ReactDOM.findDOMNode(this.refs.modal).focus();
   },
 
   componentWillUnmount() {
@@ -112,26 +107,21 @@ export default React.createClass({
     };
 
     const modalCloseButton = {
-      position: 'absolute',
-      textAlign: 'left',
-      verticalAlign: 'top',
-      color: '#fff',
-      width: 40,
-      height: 40,
-      fontSize: '40px',
-      fontWeight: 'bold',
-      lineHeight: 0.5,
-      textDecoration: 'none',
-      top: 15,
-      left: 15,
-
-      states: [
-        {
-          hover: {
-            color: '#666'
-          }
-        }
-      ]
+      'position': 'absolute',
+      'textAlign': 'left',
+      'verticalAlign': 'top',
+      'color': '#fff',
+      'width': 40,
+      'height': 40,
+      'fontSize': '40px',
+      'fontWeight': 'bold',
+      'lineHeight': 0.5,
+      'textDecoration': 'none',
+      'top': 15,
+      'left': 15,
+      ':hover': {
+        color: '#666'
+      }
     };
 
     const modalPane = {
@@ -205,28 +195,28 @@ export default React.createClass({
   },
 
   componentWillEnter(done) {
-    const b = React.findDOMNode(this.refs.background);
+    const b = ReactDOM.findDOMNode(this.refs.background);
     b.style.opacity = '0';
     /*eslint-disable */
     window.getComputedStyle(b).opacity; // Force browser write of opacity state.
     /*eslint-enable */
     b.style.opacity = '1';
 
-    const overlay = React.findDOMNode(this.refs.modal);
+    const overlay = ReactDOM.findDOMNode(this.refs.modal);
     overlay.style.opacity = '1';
 
     done();
   },
 
   componentWillLeave(done) {
-    const b = React.findDOMNode(this.refs.background);
+    const b = ReactDOM.findDOMNode(this.refs.background);
     b.style.opacity = '1';
     /*eslint-disable */
     window.getComputedStyle(b).opacity; // Force browser write of opacity state.
     /*eslint-enable */
     b.style.opacity = '0';
 
-    const overlay = React.findDOMNode(this.refs.modal);
+    const overlay = ReactDOM.findDOMNode(this.refs.modal);
     overlay.style.opacity = '0';
 
     setTimeout(done, 300);
@@ -247,7 +237,7 @@ export default React.createClass({
 
     if (e.key === 'Tab' || e.keyCode === 9) {
       const focussed = e.target;
-      const focusableElements = React.findDOMNode(this.refs.modal).querySelectorAll(FOCUSABLE_ELEMENTS_SELECTOR);
+      const focusableElements = ReactDOM.findDOMNode(this.refs.modal).querySelectorAll(FOCUSABLE_ELEMENTS_SELECTOR);
 
       let focussedIndex = -1;
       for (let i = 0, l = focusableElements.length; i < l; i++) {
@@ -290,8 +280,7 @@ export default React.createClass({
           ref="modal">
           <div className="hull-login__modal__image-pane" style={styles.modalImagePane}>
             <a className="hull-login__modal_close-button"
-              {...this.getBrowserStateEvents()}
-              style={this.buildStyles(styles.modalCloseButton)}
+              style={styles.modalCloseButton}
               href="javascript: void 0;"
               aria-label="Close"
               title="Close this dialog"

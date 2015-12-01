@@ -153,7 +153,7 @@ var loaderLibrary = {
   devCss: {test: /\.(css|scss)$/, loaders: ['style?singleton=true', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss'] },
   file: {test: /\.jpe?g$|\.gif$|\.png|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: 'file' },
   svg: {test: /\.svg$/, loader: 'svg-inline' },
-  js: {test: /\.(js)$/, loader: 'babel', exclude: /node_modules|src\/vendors/ },
+  js: {test: /\.(js)$/, loader: 'babel', exclude: /node_modules\/[^hull]|src\/vendors/ },
   prodJSX: {test: /\.(jsx)$/, loader: 'babel' },
   devJSX: {test: /\.(jsx)$/, loaders: ['react-hot', 'babel'] },
 };

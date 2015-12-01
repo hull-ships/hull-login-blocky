@@ -26,7 +26,9 @@ export default React.createClass({
       left: 0,
       right: 0,
       background: '#eee',
-      listStyle: 'none'
+      listStyle: 'none',
+      padding: 0,
+      margin: 0
     };
 
     const itemWidth = items.length ? (100 / items.length) : 100;
@@ -34,7 +36,9 @@ export default React.createClass({
     const navItem = {
       display: 'block',
       float: 'left',
-      width: `${itemWidth}%`
+      width: `${itemWidth}%`,
+      padding: 0,
+      margin: 0
     };
 
     const navItemActive = {

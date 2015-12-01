@@ -36,10 +36,10 @@ class signUp extends Sections.signUp {
 
 class resetPassword extends Sections.resetPassword {
   renderHeader() {}
-  renderFooter(styles) {
+  renderFooter() {
     return (
       <div style={sectionFooter}>
-        <p style={styles.sectionText}>
+        <p>
           <TranslatedMessage tag="a"
             href="#"
             onClick={this.props.activateLogInSection}
@@ -53,10 +53,10 @@ class resetPassword extends Sections.resetPassword {
 
 class showProfile extends Sections.showProfile {
   renderHeader() {}
-  renderFooter(styles) {
+  renderFooter() {
     return (
       <div style={sectionFooter}>
-        <p style={styles.sectionText}>
+        <p>
           <TranslatedMessage tag="a"
             href="#"
             onClick={this.props.activateEditProfileSection}
@@ -70,7 +70,7 @@ class showProfile extends Sections.showProfile {
 
 class editProfile extends Sections.editProfile {
   renderHeader() {}
-  renderFooter(styles) {
+  renderFooter() {
     let message;
     let handleClick;
     if (this.props.formIsSubmitted || !this.props.hasForm) {
@@ -82,9 +82,9 @@ class editProfile extends Sections.editProfile {
     }
     return (
       <div style={sectionFooter}>
-        <p style={styles.sectionText}>
+        <p>
           <a href="javascript: void 0;" onClick={handleClick}>
-            <TranslatedMessage tag="p" style={styles.sectionText} message={message} />
+            <TranslatedMessage tag="p" message={message} />
           </a>
         </p>
       </div>

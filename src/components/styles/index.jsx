@@ -9,7 +9,7 @@ export default React.createClass({
 
   propTypes: {
     scope: PropTypes.string.isRequired,
-    reset: PropTypes.object
+    reset: PropTypes.bool
   },
 
   getSelector() {
@@ -19,30 +19,30 @@ export default React.createClass({
   getRules() {
     const styles = getStyles();
 
-    const rules = [
-      { '.hull-login__modal': styles.base },
-      { a: styles.link },
-      { 'a:active': styles.link },
-      { 'a:link': styles.link },
-      { 'a:visited': styles.link },
-      { 'a:hover': styles.linkHover },
-      { 'a:focus': styles.linkFocus },
-
-      { '::-moz-placeholder': styles.placeholder },
-      { 'input::-moz-placeholder': styles.placeholder },
-      { 'textarea::-moz-placeholder': styles.placeholder },
-      { ':-ms-input-placeholder': styles.placeholder },
-      { 'input:-ms-input-placeholder': styles.placeholder },
-      { 'textarea:-ms-input-placeholder': styles.placeholder },
-      { '::-webkit-input-placeholder': styles.placeholder },
-      { 'input::-webkit-input-placeholder': styles.placeholder },
-      { 'textarea::-webkit-input-placeholder': styles.placeholder },
-
-      { '::-moz-focus-inner': s }
-    ];
+    const rules = {
+      '.hull-login__modal': styles.base,
+      'a': styles.link,
+      'a:active': styles.link,
+      'a:link': styles.link,
+      'a:visited': styles.link,
+      'a:hover': styles.linkHover,
+      'a:focus': styles.linkFocus,
+      '::-moz-placeholder': styles.placeholder,
+      'input::-moz-placeholder': styles.placeholder,
+      'textarea::-moz-placeholder': styles.placeholder,
+      ':-ms-input-placeholder': styles.placeholder,
+      'input:-ms-input-placeholder': styles.placeholder,
+      'textarea:-ms-input-placeholder': styles.placeholder,
+      '::-webkit-input-placeholder': styles.placeholder,
+      'input::-webkit-input-placeholder': styles.placeholder,
+      'textarea::-webkit-input-placeholder': styles.placeholder,
+      '::-moz-focus-inner': s,
+      'button': { color: 'white' },
+      'input': { border: 0 }
+    };
 
     if (this.props.reset) {
-      rules.unshift({ '*': styles.reset });
+      rules['*'] = styles.reset;
     }
 
     return rules;
