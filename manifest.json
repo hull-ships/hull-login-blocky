@@ -3,7 +3,7 @@
   "description": "A login dialog designed fo TSL",
   "picture": "picture.png",
   "index": "ship.js",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "settings": [
     {
       "name":"logo_image",
