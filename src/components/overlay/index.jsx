@@ -6,7 +6,7 @@ import Nav from '../nav';
 const mediaQuery = window.matchMedia && window.matchMedia('(min-width: 900px)');
 
 function getViewport() {
-  return (mediaQuery || mediaQuery.matches) ? 'normal' : 'compact';
+  return (!mediaQuery || mediaQuery.matches) ? 'normal' : 'compact';
 }
 
 const FOCUSABLE_ELEMENTS_SELECTOR = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex]:not([tabindex="-1"]), *[contenteditable]';
@@ -223,6 +223,7 @@ export default React.createClass({
   },
 
   handleMediaQueryChange() {
+    console.warn('viewport: ', getViewport());
     this.setState({ viewport: getViewport() });
   },
 
