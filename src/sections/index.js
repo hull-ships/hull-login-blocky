@@ -42,7 +42,7 @@ class resetPassword extends Sections.resetPassword {
         <p>
           <TranslatedMessage tag="a"
             href="#"
-            onClick={this.props.activateLogInSection}
+            onClick={this.props.activateLogInSection.bind(this)}
             message="reset password switch to log-in link" />
         </p>
       </div>
@@ -69,22 +69,32 @@ class showProfile extends Sections.showProfile {
 
 
 class editProfile extends Sections.editProfile {
+
   renderHeader() {}
+
+  handleClick(e) {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    if (this.props.formIsSubmitted || !this.props.hasForm) {
+      this.props.activateShowProfileSection();
+    } else {
+      this.props.hideDialog();
+    }
+  }
+
   renderFooter() {
     let message;
-    let handleClick;
     if (this.props.formIsSubmitted || !this.props.hasForm) {
       message = 'edit profile cancel button';
-      handleClick = this.props.activateShowProfileSection;
     } else {
       message = 'edit profile cancel button when profile incomplete';
-      handleClick = this.props.hideDialog;
     }
     return (
       <div style={sectionFooter}>
         <p>
-          <a href="javascript: void 0;" onClick={handleClick}>
-            <TranslatedMessage tag="p" message={message} />
+          <a href="#" onClick={this.handleClick.bind(this)}>
+            <TranslatedMessage tag="span" message={message} />
           </a>
         </p>
       </div>
