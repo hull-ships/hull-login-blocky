@@ -13,43 +13,6 @@
       "format": "image"
     },
     {
-      "name":"primary_color",
-      "title": "Primary color",
-      "type": "string",
-      "format": "color",
-      "default": "#fa5400"
-    },
-    {
-      "name":"text_color",
-      "title": "Text color",
-      "type": "string",
-      "format": "color",
-      "default": "#aaaaaa"
-    },
-    {
-      "name":"light_text_color",
-      "title": "Light text color",
-      "type": "string",
-      "format": "color",
-      "default": "#ffffff"
-    },
-    {
-      "name":"link_color",
-      "title": "Link color",
-      "type": "string",
-      "format": "color",
-      "default": "#aaaaaa"
-    },
-    {
-      "name":"button_border_radius",
-      "title": "Button border radius",
-      "type": "number",
-      "format": "range",
-      "default": 3,
-      "minimum": 0,
-      "maximun": 100
-    },
-    {
       "name":"login_image",
       "title": "Login image",
       "description": "Show this image on the background of the login page",
@@ -96,6 +59,7 @@
       "title": "Allow email & password registration",
       "description": "Enable email-based sign ups on your website, i.e. sign ups that don't require social login.",
       "type": "boolean",
+      "format" : "hidden",
       "default": true
     },
     {
@@ -103,13 +67,15 @@
       "title": "Split name in two fields",
       "description": "Split the name field in two fields (first name & last name).",
       "type": "boolean",
-      "default": false
+      "format" : "hidden",
+      "default": true
     },
     {
       "name": "show_name_field_on_sign_up",
       "title": "Show name field on sign up",
       "description": "If checked, show a field that ask the user for his name.",
       "type": "boolean",
+      "format" : "hidden",
       "default": true
     },
     {
@@ -124,6 +90,7 @@
       "title": "Visually disable submit buttons for incomplete forms",
       "description": "If checked, disable the 'log in' and 'sign up' buttons when their forms are incomplete. Incomplete submissions will not be allowed regardless of the state of this option.",
       "type": "boolean",
+      "format" : "hidden",
       "default": false
     },
     {
