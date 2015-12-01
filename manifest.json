@@ -3,7 +3,7 @@
   "description": "A login dialog designed fo TSL",
   "picture": "picture.png",
   "index": "ship.js",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "settings": [
     {
       "name":"logo_image",
@@ -92,16 +92,23 @@
       "format": "image"
     },
     {
-      "name":"reset_styles",
-      "title": "Reset styles",
-      "description":"Isolate ship design from rest of the page by resetting the CSS styles within. Uncheck this if you want to style the ship yourself.",
+      "name":"show_classic_login",
+      "title": "Allow email & password registration",
+      "description": "Enable email-based sign ups on your website, i.e. sign ups that don't require social login.",
       "type": "boolean",
       "default": true
     },
     {
-      "name":"show_classic_login",
-      "title": "Allow email & password registration",
-      "description": "Enable email-based sign ups on your website, i.e. sign ups that don't require social login.",
+      "name": "split_name_field",
+      "title": "Split name in two fields",
+      "description": "Split the name field in two fields (first name & last name).",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "show_name_field_on_sign_up",
+      "title": "Show name field on sign up",
+      "description": "If checked, show a field that ask the user for his name.",
       "type": "boolean",
       "default": true
     },
@@ -142,67 +149,6 @@
       "type": "number",
       "format": "number",
       "default": 2
-    },
-    {
-      "name":"show_login",
-      "title": "Display log in link",
-      "description": "When logged out, show a 'log in' link.",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "name":"show_logout",
-      "title": "Display log out link",
-      "description": "When logged in, show a 'log out' link.",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "name":"show_signup",
-      "title": "Display sign up link",
-      "description": "When logged out, show a 'sign up' link.",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "name":"show_profile",
-      "title": "Display user profile link",
-      "description": "When logged in, show a link to view and edit their profile.",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "name":"custom_buttons",
-      "title": "Custom links",
-      "description": "Add custom links to show when a user is logged in.",
-      "type": "array",
-      "format": "table",
-      "items": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "title": "Link Name"
-          },
-          "url": {
-            "type": "string",
-            "title": "Link URL",
-            "format": "uri"
-          },
-          "popup": {
-            "type": "boolean",
-            "title": "New Window?"
-          }
-        },
-        "required": [ "text", "url" ]
-      },
-      "default": [
-        {
-          "text": "Account",
-          "url": "/account",
-          "popup": true
-        }
-      ]
     }
   ],
   "deployment_settings": [
