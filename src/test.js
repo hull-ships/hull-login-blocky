@@ -5,7 +5,6 @@ import Main from './main';
 import en from '../locales/en.json';
 
 function onReady(hull, user, platform, organization) {
-
   const deployment = platform.deployments[0];
 
   deployment.organization = organization;
@@ -17,7 +16,6 @@ function onReady(hull, user, platform, organization) {
   deployment.ship.settings = {
     background_color: '#ffffff',
     button_border_radius: 3,
-    custom_buttons: [],
     custom_styles: '',
     disable_buttons_automatically: true,
     edit_profile_image: 'https://hull-alpha-organizations-store.s3.amazonaws.com/hull-store%2Fsuper%2F531853659e62dd46360015b0%2F53175bb2635c78c8790032cd%2F5118c23db29c8d2a0d000001%2F1f28dee4-7775-bc4a-5ad8-581539ad5ad4.png',

@@ -86,21 +86,11 @@ export default React.createClass({
       name: 'Log in',
       action: this.props.actions.activateLogInSection
     };
-    const viewProfileNav = {
-      name: 'View Profile',
-      action: this.props.actions.activateShowProfileSection
-    };
-    const logOutNav = {
-      name: 'Log out',
-      action: this.props.actions.logOut
-    };
 
     const navs = {
       logIn: [signUpNav, assign({ current: true }, logInNav)],
       signUp: [assign({ current: true }, signUpNav), logInNav],
       resetPassword: [signUpNav, assign({ current: true }, logInNav)],
-      showProfile: [assign({ current: true }, viewProfileNav), logOutNav],
-      editProfile: [assign({ current: true }, viewProfileNav, { name: 'Edit Profile' }), logOutNav],
       thanks: null
     };
 
@@ -183,79 +173,9 @@ export default React.createClass({
   },
 
   render() {
-    const u = this.state.user;
-
-    const buttons = [];
-    if (u) {
-      if (this.state.shipSettings.show_profile) {
-        if (this.state.hasForm && !this.state.formIsSubmitted) {
-          buttons.push(
-            <TranslatedMessage tag="a"
-              href="#"
-              key="complete-profile"
-              className="hull-login__button hull-login__button--edit-profile"
-              onClick={this.props.actions.activateEditProfileSection}
-              message="nav complete profile link" />
-          );
-        } else {
-          buttons.push(
-            <a href="#"
-              key="show-profile"
-              className="hull-login__button hull-login__button--show-profile"
-              onClick={this.props.actions.activateShowProfileSection}>{u.name || u.username || u.email}</a>
-          );
-        }
-      }
-
-      if (this.state.shipSettings.custom_buttons.length) {
-        for (let i = 0; i < this.state.shipSettings.custom_buttons.length; i++) {
-          const { url, popup, text } = this.state.shipSettings.custom_buttons[i];
-          buttons.push(
-            <a href={url}
-              key={`custom-action-${i}`}
-              target={popup ? '_blank' : ''}
-              className="hull-login__button hull-login__button">{text}</a>
-          );
-        }
-      }
-
-      if (this.state.shipSettings.show_logout) {
-        buttons.push(
-          <TranslatedMessage tag="a"
-            href="#"
-            className="hull-login__button hull-login__button--log-out"
-            onClick={this.props.actions.logOut}
-            message="nav logout link" />
-        );
-      }
-    } else {
-      if (this.state.shipSettings.show_login) {
-        buttons.push(
-          <TranslatedMessage tag="a"
-            href="#"
-            key="log-in"
-            className="hull-login__button hull-login__button--log-in"
-            onClick={this.props.actions.activateLogInSection}
-            message="nav login link" />
-        );
-      }
-
-      if (this.state.shipSettings.show_signup) {
-        buttons.push(
-          <TranslatedMessage tag="a"
-            href="#"
-            key="sign-up"
-            className="hull-login__button hull-login__button--sign-up"
-            onClick={this.props.actions.activateSignUpSection}
-            message="nav sign-up link" />
-        );
-      }
-    }
-
     return (
       <div className="hull-login">
         <Styles scope={this.getScope()} />
-        {buttons}
       </div>
     );
   }

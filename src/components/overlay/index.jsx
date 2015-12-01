@@ -269,6 +269,8 @@ export default React.createClass({
     const styles = this.getStyles();
     const className = this.props.className + ' hull-login__overlay-container';
 
+    const nav = this.props.nav ? <Nav items={this.props.nav} /> : null;
+
     return (
       <div className={className} style={styles.overlayContainer}>
         <div className="hull-login__modal"
@@ -288,8 +290,8 @@ export default React.createClass({
             {this.props.children[0]}
           </div>
           <div className="hull-login__modal__form-pane" style={styles.modalFormPane}>
-            <Nav items={this.props.nav} />
-            {this.props.children[1]}
+            { nav }
+            { this.props.children[1] }
           </div>
         </div>
         <div ref="background" className="hull-login__modal__overlay-background" style={styles.overlayBackground} onClick={this.handleClose} />
