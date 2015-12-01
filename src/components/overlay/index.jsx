@@ -223,7 +223,6 @@ export default React.createClass({
   },
 
   handleMediaQueryChange() {
-    console.warn('viewport: ', getViewport());
     this.setState({ viewport: getViewport() });
   },
 
