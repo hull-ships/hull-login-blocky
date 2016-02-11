@@ -21,6 +21,7 @@ export default React.createClass({
     image: PropTypes.string,
     children: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired,
+    shipSettings: PropTypes.objectisRequired,
     nav: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       action: PropTypes.oneOfType([
@@ -56,10 +57,8 @@ export default React.createClass({
   },
 
   getStyles() {
-
     const settings = getSettings();
     const { shipSettings } = this.props;
-
     const overlayContainer = {
       position: 'fixed',
       left: 0,
@@ -123,7 +122,7 @@ export default React.createClass({
       'top': 15,
       'left': 15,
       ':hover': {
-        'color': '#666'
+        color: '#666'
       }
     };
 
