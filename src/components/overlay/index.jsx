@@ -56,7 +56,9 @@ export default React.createClass({
   },
 
   getStyles() {
+
     const settings = getSettings();
+    const { shipSettings } = this.props;
 
     const overlayContainer = {
       position: 'fixed',
@@ -110,7 +112,8 @@ export default React.createClass({
       'position': 'absolute',
       'textAlign': 'left',
       'verticalAlign': 'top',
-      'color': '#fff',
+      'color': shipSettings.close_button_color,
+      'opacity': 0.7,
       'width': 40,
       'height': 40,
       'fontSize': '40px',
@@ -120,7 +123,7 @@ export default React.createClass({
       'top': 15,
       'left': 15,
       ':hover': {
-        color: '#666'
+        'color': '#666'
       }
     };
 

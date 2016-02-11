@@ -108,6 +108,7 @@ export default React.createClass({
 
     return (
       <Overlay className={this.getScope()}
+        shipSettings={this.state.shipSettings}
         onClose={this.props.actions.hideDialog}
         title={overlayTitle}
         nav={nav}

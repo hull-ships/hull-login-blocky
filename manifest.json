@@ -116,6 +116,14 @@
       "type": "number",
       "format": "number",
       "default": 2
+    },
+    {
+      "name":"close_button_color",
+      "title": "Close button color",
+      "description": "Change the color of the close button to make it visible on top of your custom images.",
+      "type": "string",
+      "format": "color",
+      "default": "#0093E6"
     }
   ],
   "deployment_settings": [
