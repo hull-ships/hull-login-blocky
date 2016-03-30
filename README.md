@@ -14,7 +14,7 @@ https://hull-ships.github.io/hull-login/manifest.json
 Ensure that [Node.js](http://nodejs.org) and [gulp.js](http://gulpjs.com) are installed.
 
 ```
-git clone git@github.com:hull-ships/hull-login.git
+git clone git@github.com:hull-ships/login-blocky.git
 cd hull-login
 npm install
 gulp
