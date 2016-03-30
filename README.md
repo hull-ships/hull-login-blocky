@@ -15,7 +15,7 @@ Ensure that [Node.js](http://nodejs.org) and [gulp.js](http://gulpjs.com) are in
 
 ```
 git clone git@github.com:hull-ships/login-blocky.git
-cd hull-login
+cd login-blocky
 npm install
 gulp
 ```
